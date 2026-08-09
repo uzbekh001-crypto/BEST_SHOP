@@ -1,0 +1,436 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --bg: #f5f7fb;
+    --card: #ffffff;
+    --text: #111827;
+    --muted: #8a94a6;
+    --accent: #5b5ff0;
+    --border: #edf0f5;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, Arial, sans-serif;
+
+    background: var(--bg);
+    color: var(--text);
+
+    min-height: 100vh;
+
+    -webkit-tap-highlight-color: transparent;
+}
+
+button {
+    font-family: inherit;
+    border: none;
+    cursor: pointer;
+}
+
+.app {
+    width: 100%;
+    max-width: 520px;
+    min-height: 100vh;
+    margin: 0 auto;
+    position: relative;
+}
+
+.content {
+    padding: 24px 18px 110px;
+}
+
+.page {
+    display: none;
+    animation: fadeIn 0.2s ease;
+}
+
+.page.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* WELCOME */
+
+.welcome {
+    margin-bottom: 24px;
+}
+
+.welcome span {
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.welcome h1 {
+    font-size: 30px;
+    margin-top: 5px;
+    letter-spacing: -1px;
+}
+
+.welcome p {
+    color: var(--muted);
+    margin-top: 5px;
+}
+
+
+/* FEATURED */
+
+.featured-card {
+    background: var(--text);
+    color: white;
+
+    border-radius: 24px;
+    padding: 20px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+
+    margin-bottom: 14px;
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.featured-icon {
+    width: 52px;
+    height: 52px;
+
+    border-radius: 17px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(255, 255, 255, 0.1);
+
+    font-size: 25px;
+}
+
+.featured-info {
+    flex: 1;
+}
+
+.featured-info h2 {
+    font-size: 17px;
+}
+
+.featured-info p {
+    font-size: 12px;
+    margin-top: 5px;
+    opacity: 0.65;
+}
+
+.arrow-btn {
+    width: 40px;
+    height: 40px;
+
+    border-radius: 50%;
+
+    background: white;
+    color: var(--text);
+
+    font-size: 20px;
+}
+
+
+/* SMALL CARDS */
+
+.small-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+}
+
+.service-card {
+    background: var(--card);
+    border-radius: 22px;
+    padding: 18px;
+
+    border: 1px solid var(--border);
+
+    min-height: 145px;
+}
+
+.service-icon {
+    width: 48px;
+    height: 48px;
+
+    border-radius: 16px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--bg);
+
+    font-size: 23px;
+
+    margin-bottom: 18px;
+}
+
+.service-card h3 {
+    font-size: 16px;
+}
+
+.service-card p {
+    color: var(--muted);
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+
+/* TITLES */
+
+.page-title {
+    margin-bottom: 22px;
+}
+
+.page-title h1 {
+    font-size: 28px;
+}
+
+.page-title p {
+    color: var(--muted);
+    margin-top: 5px;
+}
+
+
+/* LIST */
+
+.list-card,
+.game-card {
+    background: var(--card);
+
+    border: 1px solid var(--border);
+
+    border-radius: 20px;
+
+    padding: 16px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+
+    margin-bottom: 12px;
+}
+
+.list-icon,
+.game-icon {
+    width: 50px;
+    height: 50px;
+
+    border-radius: 16px;
+
+    background: var(--bg);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 23px;
+}
+
+.list-card div:nth-child(2),
+.game-card div:nth-child(2) {
+    flex: 1;
+}
+
+.list-card h3,
+.game-card h3 {
+    font-size: 15px;
+}
+
+.list-card p,
+.game-card p {
+    color: var(--muted);
+    font-size: 12px;
+    margin-top: 4px;
+}
+
+.list-card > span,
+.game-card > span {
+    color: var(--muted);
+    font-size: 25px;
+}
+
+
+/* PROFILE */
+
+.profile {
+    text-align: center;
+    padding: 20px 0 28px;
+}
+
+.avatar {
+    width: 84px;
+    height: 84px;
+
+    margin: 0 auto 14px;
+
+    border-radius: 50%;
+
+    background: var(--card);
+
+    border: 1px solid var(--border);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 36px;
+}
+
+.profile h1 {
+    font-size: 21px;
+}
+
+.profile p {
+    color: var(--muted);
+    margin-top: 5px;
+}
+
+.profile-menu {
+    background: var(--card);
+    border-radius: 22px;
+
+    border: 1px solid var(--border);
+
+    overflow: hidden;
+}
+
+.profile-item {
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+
+    padding: 17px;
+
+    border-bottom: 1px solid var(--border);
+}
+
+.profile-item:last-child {
+    border-bottom: none;
+}
+
+.profile-item p {
+    flex: 1;
+    font-size: 14px;
+}
+
+.profile-item > span:first-child {
+    font-size: 19px;
+}
+
+
+/* BOTTOM NAV */
+
+.bottom-nav {
+    position: fixed;
+
+    left: 50%;
+    bottom: 14px;
+
+    transform: translateX(-50%);
+
+    width: calc(100% - 28px);
+    max-width: 492px;
+
+    background: rgba(255, 255, 255, 0.92);
+
+    backdrop-filter: blur(18px);
+
+    border: 1px solid var(--border);
+
+    border-radius: 26px;
+
+    padding: 8px;
+
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.08);
+
+    z-index: 100;
+}
+
+.nav-btn {
+    background: transparent;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    gap: 4px;
+
+    padding: 8px 3px;
+
+    border-radius: 19px;
+
+    color: var(--muted);
+
+    transition: 0.2s;
+}
+
+.nav-btn span {
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    font-size: 19px;
+}
+
+.nav-btn small {
+    font-size: 9px;
+}
+
+.nav-btn.active {
+    color: var(--accent);
+}
+
+.nav-btn.active span {
+    background: rgba(91, 95, 240, 0.1);
+}
+
+
+/* MOBILE */
+
+@media (max-width: 380px) {
+
+    .content {
+        padding-left: 14px;
+        padding-right: 14px;
+    }
+
+    .welcome h1 {
+        font-size: 26px;
+    }
+
+    .bottom-nav {
+        width: calc(100% - 20px);
+        bottom: 10px;
+    }
+}
