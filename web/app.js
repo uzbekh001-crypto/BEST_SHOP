@@ -10,7 +10,6 @@ tg.expand();
 
 const user = tg.initDataUnsafe?.user;
 
-
 if (user) {
 
     const firstName =
@@ -155,6 +154,7 @@ navButtons.forEach(button => {
             }
         }
     );
+
 });
 
 
@@ -177,7 +177,9 @@ actionButtons.forEach(button => {
                 button.dataset.action;
 
 
+            // =====================================
             // PREMIUM
+            // =====================================
 
             if (action === "premium") {
 
@@ -187,7 +189,9 @@ actionButtons.forEach(button => {
             }
 
 
+            // =====================================
             // STARS
+            // =====================================
 
             if (action === "stars") {
 
@@ -200,7 +204,9 @@ actionButtons.forEach(button => {
             }
 
 
+            // =====================================
             // GIFTS
+            // =====================================
 
             if (action === "gifts") {
 
@@ -213,7 +219,9 @@ actionButtons.forEach(button => {
             }
 
 
-            // GAMES
+            // =====================================
+            // GAMES PAGE
+            // =====================================
 
             if (action === "games") {
 
@@ -222,8 +230,48 @@ actionButtons.forEach(button => {
                 return;
             }
 
+
+            // =====================================
+            // GAME CONTACT
+            // =====================================
+            // PUBG, Free Fire va boshqa o'yinlar
+            // bosilganda @ashurov_pg profiliga o'tadi.
+            // =====================================
+
+            if (action === "game-contact") {
+
+                const telegramUsername =
+                    "ashurov_pg";
+
+
+                const telegramUrl =
+                    `https://t.me/${telegramUsername}`;
+
+
+                if (
+                    tg.openTelegramLink &&
+                    typeof tg.openTelegramLink === "function"
+                ) {
+
+                    tg.openTelegramLink(
+                        telegramUrl
+                    );
+
+                } else {
+
+                    window.open(
+                        telegramUrl,
+                        "_blank"
+                    );
+                }
+
+
+                return;
+            }
+
         }
     );
+
 });
 
 
@@ -251,6 +299,7 @@ backButtons.forEach(button => {
             }
         }
     );
+
 });
 
 
@@ -275,6 +324,7 @@ premiumPlans.forEach(plan => {
             );
         }
     );
+
 });
 
 
@@ -319,6 +369,7 @@ if (tg.BackButton) {
             tg.BackButton.hide();
         }
     );
+
 }
 
 
