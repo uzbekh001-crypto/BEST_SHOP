@@ -10,26 +10,35 @@ tg.expand();
 
 const user = tg.initDataUnsafe?.user;
 
+
 if (user) {
 
-    const firstName = user.first_name || "Foydalanuvchi";
+    const firstName =
+        user.first_name || "Foydalanuvchi";
+
 
     // Greeting
-    const greeting = document.getElementById("greeting");
+
+    const greeting =
+        document.getElementById("greeting");
 
     if (greeting) {
-        greeting.textContent = `Salom, ${firstName} 👋`;
+
+        greeting.textContent =
+            `Salom, ${firstName} 👋`;
     }
 
 
     // Profile name
+
     const profileName =
         document.getElementById("profile-name");
 
     if (profileName) {
 
         const fullName =
-            `${user.first_name || ""} ${user.last_name || ""}`.trim();
+            `${user.first_name || ""} ${user.last_name || ""}`
+                .trim();
 
         profileName.textContent =
             fullName || "Foydalanuvchi";
@@ -37,6 +46,7 @@ if (user) {
 
 
     // Username
+
     const profileUsername =
         document.getElementById("profile-username");
 
@@ -50,16 +60,19 @@ if (user) {
 
 
     // Telegram ID
+
     const profileId =
         document.getElementById("profile-id");
 
     if (profileId) {
+
         profileId.textContent =
             `Telegram ID: ${user.id || "—"}`;
     }
 
 
-    // Profile avatar
+    // Avatar
+
     if (user.photo_url) {
 
         const avatar =
@@ -72,7 +85,6 @@ if (user) {
         }
 
 
-        // Header avatar
         const headerAvatar =
             document.getElementById("header-avatar");
 
@@ -83,6 +95,7 @@ if (user) {
         }
     }
 }
+
 
 
 // =========================================
@@ -98,17 +111,8 @@ const pages =
 
 function openPage(pageId) {
 
-    // Buttons
-    navButtons.forEach(button => {
-
-        button.classList.toggle(
-            "active",
-            button.dataset.page === pageId
-        );
-    });
-
-
     // Pages
+
     pages.forEach(page => {
 
         page.classList.toggle(
@@ -118,7 +122,17 @@ function openPage(pageId) {
     });
 
 
-    // Scroll top
+    // Bottom navigation
+
+    navButtons.forEach(button => {
+
+        button.classList.toggle(
+            "active",
+            button.dataset.page === pageId
+        );
+    });
+
+
     window.scrollTo({
         top: 0,
         behavior: "smooth"
@@ -128,20 +142,25 @@ function openPage(pageId) {
 
 navButtons.forEach(button => {
 
-    button.addEventListener("click", () => {
+    button.addEventListener(
+        "click",
+        () => {
 
-        const page =
-            button.dataset.page;
+            const page =
+                button.dataset.page;
 
-        if (page) {
-            openPage(page);
+            if (page) {
+
+                openPage(page);
+            }
         }
-    });
+    );
 });
 
 
+
 // =========================================
-// SERVICE BUTTONS
+// SERVICE ACTIONS
 // =========================================
 
 const actionButtons =
@@ -150,66 +169,125 @@ const actionButtons =
 
 actionButtons.forEach(button => {
 
-    button.addEventListener("click", () => {
+    button.addEventListener(
+        "click",
+        () => {
 
-        const action =
-            button.dataset.action;
+            const action =
+                button.dataset.action;
 
 
-        // Premium
-        if (action === "premium") {
+            // PREMIUM
+
+            if (action === "premium") {
+
+                openPage("premium");
+
+                return;
+            }
+
+
+            // STARS
+
+            if (action === "stars") {
+
+                showComingSoon(
+                    "⭐ Telegram Stars",
+                    "Stars xarid qilish oynasi tez orada ishga tushadi."
+                );
+
+                return;
+            }
+
+
+            // GIFTS
+
+            if (action === "gifts") {
+
+                showComingSoon(
+                    "🎁 Telegram Gifts",
+                    "Gift xarid qilish oynasi tez orada ishga tushadi."
+                );
+
+                return;
+            }
+
+
+            // GAMES
+
+            if (action === "games") {
+
+                openPage("games");
+
+                return;
+            }
+
+        }
+    );
+});
+
+
+
+// =========================================
+// PREMIUM BACK BUTTON
+// =========================================
+
+const backButtons =
+    document.querySelectorAll(".back-button");
+
+
+backButtons.forEach(button => {
+
+    button.addEventListener(
+        "click",
+        () => {
+
+            const page =
+                button.dataset.page;
+
+            if (page) {
+
+                openPage(page);
+            }
+        }
+    );
+});
+
+
+
+// =========================================
+// PREMIUM PLAN CLICK
+// =========================================
+
+const premiumPlans =
+    document.querySelectorAll(".premium-plan");
+
+
+premiumPlans.forEach(plan => {
+
+    plan.addEventListener(
+        "click",
+        () => {
 
             showComingSoon(
                 "💎 Telegram Premium",
-                "Premium xarid qilish oynasi tez orada ishga tushadi."
+                "Hozircha paket narxlari ulanmoqda."
             );
-
-            return;
         }
-
-
-        // Stars
-        if (action === "stars") {
-
-            showComingSoon(
-                "⭐ Telegram Stars",
-                "Stars xarid qilish oynasi tez orada ishga tushadi."
-            );
-
-            return;
-        }
-
-
-        // Gifts
-        if (action === "gifts") {
-
-            showComingSoon(
-                "🎁 Telegram Gifts",
-                "Gift xarid qilish oynasi tez orada ishga tushadi."
-            );
-
-            return;
-        }
-
-
-        // Games
-        if (action === "games") {
-
-            openPage("games");
-
-            return;
-        }
-    });
+    );
 });
+
 
 
 // =========================================
 // TEMPORARY MESSAGE
 // =========================================
 
-function showComingSoon(title, message) {
+function showComingSoon(
+    title,
+    message
+) {
 
-    // Telegram alert
     if (tg.showAlert) {
 
         tg.showAlert(
@@ -220,11 +298,11 @@ function showComingSoon(title, message) {
     }
 
 
-    // Browser fallback
     alert(
         `${title}\n\n${message}`
     );
 }
+
 
 
 // =========================================
@@ -233,20 +311,25 @@ function showComingSoon(title, message) {
 
 if (tg.BackButton) {
 
-    tg.BackButton.onClick(() => {
+    tg.BackButton.onClick(
+        () => {
 
-        openPage("home");
+            openPage("home");
 
-        tg.BackButton.hide();
-    });
+            tg.BackButton.hide();
+        }
+    );
 }
 
 
+
 // =========================================
-// THEME
+// DARK THEME
 // =========================================
 
-document.documentElement.style.colorScheme = "dark";
+document.documentElement.style.colorScheme =
+    "dark";
+
 
 
 // =========================================
