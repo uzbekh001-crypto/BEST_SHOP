@@ -112,3 +112,43 @@ button:active {
 .profile h1 { font-size: 20px; font-weight: 700; }
 .profile p { color: var(--muted); font-size: 13px; margin-top: 4px; }
 .telegram-id { display: inline-block; margin-top: 8px; padding: 4px 10px; background: var(--blue-soft); color: var(--blue); border-radius: 20px; font-size: 11px; font-weight: 600; }
+
+/* Uzluksiz Lenta Animatsiyasi */
+.ticker {
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 10px 0;
+    margin-bottom: 20px;
+}
+
+.ticker-track {
+    display: inline-flex;
+    align-items: center;
+    gap: 15px;
+    animation: marquee 12s linear infinite;
+}
+
+.ticker-item {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-soft);
+}
+
+.ticker-item span {
+    color: var(--blue);
+    margin-left: 4px;
+}
+
+.ticker-dot {
+    color: var(--muted);
+    font-size: 10px;
+}
+
+@keyframes marquee {
+    0% { transform: translateX(0%); }
+    100% { transform: translateX(-50%); }
+}
