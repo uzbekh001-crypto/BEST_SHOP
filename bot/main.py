@@ -1,132 +1,62 @@
 import os
-
-
-
-from dotenv import load\_dotenv
-
+from dotenv import load_dotenv
 from telegram import (
-
-Update,
-
-KeyboardButton,
-
-ReplyKeyboardMarkup,
-
-WebAppInfo,
-
+    Update,
+    KeyboardButton,
+    ReplyKeyboardMarkup,
+    WebAppInfo,
 )
-
 from telegram.ext import (
-
-Application,
-
-CommandHandler,
-
-ContextTypes,
-
+    Application,
+    CommandHandler,
+    ContextTypes,
 )
 
+# .env fayldan o'zgaruvchilarni yuklash
+load_dotenv()
+
+BOT_TOKEN = os.getenv("BOT_TOKEN")
+WEBAPP_URL = os.getenv("WEBAPP_URL")
 
 
-load\_dotenv()
+async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    keyboard = [
+        [
+            KeyboardButton(
+                text="📱 BEST SHOP",
+                web_app=WebAppInfo(url=WEBAPP_URL),
+            )
+        ]
+    ]
 
+    reply_markup = ReplyKeyboardMarkup(
+        keyboard,
+        resize_keyboard=True,
+    )
 
-
-BOT\_TOKEN = os.getenv("BOT\_TOKEN")
-
-WEBAPP\_URL = os.getenv("WEBAPP\_URL")
-
-
-
-async def start(update: Update, context: ContextTypes.DEFAULT\_TYPE):
-
-keyboard = [
-
-[
-
-KeyboardButton(
-
-text="📱 BEST SHOP",
-
-web\_app=WebAppInfo(url=WEBAPP\_URL),
-
-)
-
-]
-
-]
-
-
-
-```
-
-reply_markup = ReplyKeyboardMarkup(
-
-    keyboard,
-
-    resize_keyboard=True,
-
-)
-
-
-
-await update.message.reply_text(
-
-    "👋 Assalomu alaykum!\n\n"
-
-    "BEST SHOP xizmatlaridan foydalanish uchun "
-
-    "quyidagi tugmani bosing 👇",
-
-    reply_markup=reply_markup,
-
-)
-
-```
-
+    await update.message.reply_text(
+        "👋 Assalomu alaykum!\n\n"
+        "BEST SHOP xizmatlaridan foydalanish uchun "
+        "quyidagi tugmani bosing 👇",
+        reply_markup=reply_markup,
+    )
 
 
 def main():
+    if not BOT_TOKEN:
+        raise ValueError("BOT_TOKEN .env faylda topilmadi!")
 
-if not BOT\_TOKEN:
+    if not WEBAPP_URL:
+        raise ValueError("WEBAPP_URL .env faylda topilmadi!")
 
-raise ValueError("BOT\_TOKEN .env faylda topilmadi!")
+    app = Application.builder().token(BOT_TOKEN).build()
 
+    app.add_handler(CommandHandler("start", start))
 
+    print("BEST SHOP bot ishga tushdi...")
 
-```
-
-if not WEBAPP_URL:
-
-    raise ValueError("WEBAPP_URL .env faylda topilmadi!")
-
-
-
-app = Application.builder().token(BOT_TOKEN).build()
+    app.run_polling()
 
 
-
-app.add_handler(CommandHandler("start", start))
-
-
-
-print("BEST SHOP bot ishga tushdi...")
-
-
-
-app.run_polling()
-
-```
-
-
-
-if **name** == "**main**":
-
-main()
-
-
-
-
-
-
-
+if __name__ == "__main__":
+    main()
