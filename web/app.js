@@ -1,28 +1,48 @@
-const tg = window.Telegram.WebApp;
-
-tg.ready();
-tg.expand();
+const tg = window.Telegram?.WebApp;
 
 
 // =========================================
-// API
+// TELEGRAM
 // =========================================
 
-const API_URL = "http://127.0.0.1:8000";
+if (tg) {
+    tg.ready();
+    tg.expand();
+
+    if (tg.enableClosingConfirmation) {
+        tg.enableClosingConfirmation();
+    }
+}
+
+
+// =========================================
+// ELEMENTS
+// =========================================
+
+const pages =
+    document.querySelectorAll(".page");
+
+const navButtons =
+    document.querySelectorAll(".nav-btn");
+
+const toast =
+    document.getElementById("toast");
 
 
 // =========================================
 // TELEGRAM USER
 // =========================================
 
-const user = tg.initDataUnsafe?.user;
+const user =
+    tg?.initDataUnsafe?.user || null;
 
 
-// =========================================
-// UI USER DATA
-// =========================================
+function setupTelegramUser() {
 
-if (user) {
+    if (!user) {
+        return;
+    }
+
 
     const firstName =
         user.first_name || "Foydalanuvchi";
@@ -58,15 +78,19 @@ if (user) {
 
     // Username
 
+    const username =
+        user.username
+            ? `@${user.username}`
+            : "Username mavjud emas";
+
+
     const profileUsername =
         document.getElementById("profile-username");
 
     if (profileUsername) {
 
         profileUsername.textContent =
-            user.username
-                ? `@${user.username}`
-                : "Username mavjud emas";
+            username;
     }
 
 
@@ -89,104 +113,62 @@ if (user) {
         const avatar =
             document.getElementById("avatar");
 
-        if (avatar) {
-
-            avatar.innerHTML =
-                `<img src="${user.photo_url}" alt="avatar">`;
-        }
-
-
         const headerAvatar =
             document.getElementById("header-avatar");
 
+
+        if (avatar) {
+
+            avatar.innerHTML = "";
+
+            const img =
+                document.createElement("img");
+
+            img.src =
+                user.photo_url;
+
+            img.alt =
+                "avatar";
+
+            avatar.appendChild(img);
+        }
+
+
         if (headerAvatar) {
 
-            headerAvatar.innerHTML =
-                `<img src="${user.photo_url}" alt="avatar">`;
+            headerAvatar.innerHTML = "";
+
+            const img =
+                document.createElement("img");
+
+            img.src =
+                user.photo_url;
+
+            img.alt =
+                "avatar";
+
+            headerAvatar.appendChild(img);
         }
     }
 }
 
 
-// =========================================
-// BACKEND USER SYNC
-// =========================================
-
-async function syncUserWithBackend() {
-
-    if (!tg.initData) {
-
-        console.warn(
-            "Telegram initData mavjud emas."
-        );
-
-        return null;
-    }
-
-
-    try {
-
-        const response =
-            await fetch(
-                `${API_URL}/api/users/me`,
-                {
-                    method: "GET",
-
-                    headers: {
-                        "X-Telegram-Init-Data":
-                            tg.initData
-                    }
-                }
-            );
-
-
-        if (!response.ok) {
-
-            const error =
-                await response.text();
-
-            throw new Error(
-                `Backend xatosi: ${error}`
-            );
-        }
-
-
-        const data =
-            await response.json();
-
-
-        console.log(
-            "BEST SHOP user:",
-            data
-        );
-
-
-        return data;
-
-    } catch (error) {
-
-        console.error(
-            "User backendga yuborilmadi:",
-            error
-        );
-
-        return null;
-    }
-}
+setupTelegramUser();
 
 
 // =========================================
 // NAVIGATION
 // =========================================
 
-const navButtons =
-    document.querySelectorAll(".nav-btn");
-
-const pages =
-    document.querySelectorAll(".page");
-
-
 function openPage(pageId) {
+
+    const target =
+        document.getElementById(pageId);
+
+    if (!target) {
+        return;
+    }
+
 
     pages.forEach(page => {
 
@@ -210,8 +192,41 @@ function openPage(pageId) {
         top: 0,
         behavior: "smooth"
     });
+
+
+    updateTelegramBackButton(pageId);
 }
 
+
+function updateTelegramBackButton(pageId) {
+
+    if (!tg?.BackButton) {
+        return;
+    }
+
+
+    const rootPages = [
+        "home",
+        "services",
+        "games",
+        "profile"
+    ];
+
+
+    if (rootPages.includes(pageId)) {
+
+        tg.BackButton.hide();
+
+    } else {
+
+        tg.BackButton.show();
+    }
+}
+
+
+// =========================================
+// BOTTOM NAV
+// =========================================
 
 navButtons.forEach(button => {
 
@@ -232,143 +247,462 @@ navButtons.forEach(button => {
 
 
 // =========================================
-// SERVICE ACTIONS
+// DATA-PAGE BUTTONS
 // =========================================
 
-const actionButtons =
-    document.querySelectorAll("[data-action]");
+document
+    .querySelectorAll("[data-page]")
+    .forEach(button => {
+
+        if (button.classList.contains("nav-btn")) {
+            return;
+        }
 
 
-actionButtons.forEach(button => {
+        button.addEventListener(
+            "click",
+            () => {
+
+                const page =
+                    button.dataset.page;
+
+                if (page) {
+
+                    openPage(page);
+                }
+            }
+        );
+    });
+
+
+// =========================================
+// SERVICES
+// =========================================
+
+document
+    .querySelectorAll("[data-service]")
+    .forEach(button => {
+
+        button.addEventListener(
+            "click",
+            () => {
+
+                const service =
+                    button.dataset.service;
+
+
+                if (service === "premium") {
+
+                    openPage("premium");
+
+                    return;
+                }
+
+
+                if (service === "stars") {
+
+                    openPage("stars");
+
+                    return;
+                }
+
+
+                if (service === "gifts") {
+
+                    openPage("gifts");
+
+                    return;
+                }
+            }
+        );
+    });
+
+
+// =========================================
+// PREMIUM
+// =========================================
+
+document
+    .querySelectorAll(".premium-plan")
+    .forEach(plan => {
+
+        plan.addEventListener(
+            "click",
+            () => {
+
+                const months =
+                    plan.dataset.plan;
+
+
+                showToast(
+                    `${months} oylik Premium tanlandi`
+                );
+
+                /*
+                 * PAYMENT / ORDER
+                 * keyin shu joyga ulanadi.
+                 *
+                 * Hozircha mavjud invoice
+                 * tizimiga tegilmaydi.
+                 */
+            }
+        );
+    });
+
+
+// =========================================
+// STARS
+// =========================================
+
+let selectedStars = 0;
+
+
+const starsButtons =
+    document.querySelectorAll(
+        "[data-stars]"
+    );
+
+
+const selectedStarsElement =
+    document.getElementById(
+        "selected-stars"
+    );
+
+
+starsButtons.forEach(button => {
 
     button.addEventListener(
         "click",
         () => {
 
-            const action =
-                button.dataset.action;
+            starsButtons.forEach(
+                item => {
+
+                    item.classList.remove(
+                        "selected"
+                    );
+                }
+            );
 
 
-            // PREMIUM
+            button.classList.add(
+                "selected"
+            );
 
-            if (action === "premium") {
 
-                openPage("premium");
+            selectedStars =
+                Number(
+                    button.dataset.stars
+                );
+
+
+            if (selectedStarsElement) {
+
+                selectedStarsElement.textContent =
+                    `${selectedStars} ⭐`;
+            }
+        }
+    );
+});
+
+
+const starsContinue =
+    document.getElementById(
+        "stars-continue"
+    );
+
+
+if (starsContinue) {
+
+    starsContinue.addEventListener(
+        "click",
+        () => {
+
+            const input =
+                document.getElementById(
+                    "stars-username"
+                );
+
+
+            const username =
+                input
+                    ? input.value.trim()
+                    : "";
+
+
+            if (!username) {
+
+                showToast(
+                    "Avval username kiriting"
+                );
+
+                input?.focus();
 
                 return;
             }
 
 
-            // STARS
+            if (!selectedStars) {
 
-            if (action === "stars") {
-
-                showComingSoon(
-                    "⭐ Telegram Stars",
-                    "Stars xarid qilish oynasi tez orada ishga tushadi."
+                showToast(
+                    "Stars miqdorini tanlang"
                 );
 
                 return;
             }
 
 
-            // GIFTS
+            showToast(
+                `@${username} uchun ${selectedStars} ⭐ tanlandi`
+            );
 
-            if (action === "gifts") {
+            /*
+             * Keyinchalik:
+             * order yaratish →
+             * invoice →
+             * payment
+             * shu yerga ulanadi.
+             */
+        }
+    );
+}
 
-                showComingSoon(
-                    "🎁 Telegram Gifts",
-                    "Gift xarid qilish oynasi tez orada ishga tushadi."
+
+// =========================================
+// GIFTS
+// =========================================
+
+document
+    .querySelectorAll(".gift-item")
+    .forEach(gift => {
+
+        gift.addEventListener(
+            "click",
+            () => {
+
+                const name =
+                    gift.querySelector(
+                        "strong"
+                    )?.textContent || "Gift";
+
+
+                const price =
+                    gift.querySelector(
+                        "small"
+                    )?.textContent || "";
+
+
+                showToast(
+                    `${name} — ${price}`
                 );
 
-                return;
+                /*
+                 * Keyinchalik gift order
+                 * tizimiga ulanadi.
+                 */
             }
+        );
+    });
 
 
-            // GAMES
+// =========================================
+// GAMES
+// =========================================
 
-            if (action === "games") {
+document
+    .querySelectorAll(".game-row")
+    .forEach(game => {
 
-                openPage("games");
+        game.addEventListener(
+            "click",
+            () => {
 
-                return;
+                const gameName =
+                    game.dataset.game;
+
+
+                showToast(
+                    `${gameName} donat xizmati tez orada`
+                );
             }
+        );
+    });
 
-        }
+
+const otherGames =
+    document.getElementById(
+        "other-games"
     );
-});
 
 
-// =========================================
-// PREMIUM BACK BUTTON
-// =========================================
+if (otherGames) {
 
-const backButtons =
-    document.querySelectorAll(".back-button");
-
-
-backButtons.forEach(button => {
-
-    button.addEventListener(
+    otherGames.addEventListener(
         "click",
         () => {
 
-            const page =
-                button.dataset.page;
-
-            if (page) {
-
-                openPage(page);
-            }
-        }
-    );
-});
-
-
-// =========================================
-// PREMIUM PLAN CLICK
-// =========================================
-
-const premiumPlans =
-    document.querySelectorAll(".premium-plan");
-
-
-premiumPlans.forEach(plan => {
-
-    plan.addEventListener(
-        "click",
-        () => {
-
-            showComingSoon(
-                "💎 Telegram Premium",
-                "Hozircha paket narxlari ulanmoqda."
+            showToast(
+                "Boshqa o‘yinlar tez orada qo‘shiladi"
             );
         }
     );
-});
+}
 
 
 // =========================================
-// TEMPORARY MESSAGE
+// PROFILE LINKS
 // =========================================
 
-function showComingSoon(
-    title,
-    message
-) {
+const profileButton =
+    document.querySelector(
+        "[data-profile]"
+    );
 
-    if (tg.showAlert) {
 
-        tg.showAlert(
-            `${title}\n\n${message}`
+if (profileButton) {
+
+    profileButton.addEventListener(
+        "click",
+        () => {
+
+            openPage("profile");
+        }
+    );
+}
+
+
+// =========================================
+// PROFILE MENU
+// =========================================
+
+document
+    .querySelectorAll(
+        "[data-profile-page]"
+    )
+    .forEach(button => {
+
+        button.addEventListener(
+            "click",
+            () => {
+
+                const type =
+                    button.dataset.profilePage;
+
+
+                const messages = {
+
+                    orders:
+                        "Buyurtmalar tarixi tez orada",
+
+                    bonus:
+                        "Bonuslar bo‘limi tez orada",
+
+                    referral:
+                        "Referal tizimi tez orada",
+
+                    settings:
+                        "Sozlamalar tez orada",
+
+                    help:
+                        "Yordam bo‘limi tez orada"
+                };
+
+
+                showToast(
+                    messages[type] ||
+                    "Tez orada"
+                );
+            }
         );
-
-        return;
-    }
+    });
 
 
-    alert(
-        `${title}\n\n${message}`
+// =========================================
+// TELEGRAM PROFILE
+// =========================================
+
+const telegramProfile =
+    document.getElementById(
+        "telegram-profile"
+    );
+
+
+if (telegramProfile) {
+
+    telegramProfile.addEventListener(
+        "click",
+        () => {
+
+            if (!user?.id) {
+
+                showToast(
+                    "Telegram profil aniqlanmadi"
+                );
+
+                return;
+            }
+
+
+            const url =
+                `tg://user?id=${user.id}`;
+
+
+            if (tg?.openTelegramLink) {
+
+                tg.openTelegramLink(
+                    url
+                );
+
+            } else {
+
+                window.location.href =
+                    url;
+            }
+        }
+    );
+}
+
+
+// =========================================
+// BEST SHOP CHANNEL
+// =========================================
+
+const bestshopChannel =
+    document.getElementById(
+        "bestshop-channel"
+    );
+
+
+if (bestshopChannel) {
+
+    bestshopChannel.addEventListener(
+        "click",
+        () => {
+
+            /*
+             * DIQQAT:
+             * Kanal username'i aniq bo‘lganda
+             * shu URL'ni almashtiramiz.
+             */
+
+            const channelUrl =
+                "https://t.me/bestshop";
+
+
+            if (tg?.openTelegramLink) {
+
+                tg.openTelegramLink(
+                    channelUrl
+                );
+
+            } else {
+
+                window.open(
+                    channelUrl,
+                    "_blank"
+                );
+            }
+        }
     );
 }
 
@@ -377,21 +711,83 @@ function showComingSoon(
 // TELEGRAM BACK BUTTON
 // =========================================
 
-if (tg.BackButton) {
+if (tg?.BackButton) {
 
     tg.BackButton.onClick(
         () => {
 
-            openPage("home");
+            const activePage =
+                document.querySelector(
+                    ".page.active"
+                );
 
-            tg.BackButton.hide();
+
+            const pageId =
+                activePage?.id;
+
+
+            if (
+                pageId === "premium" ||
+                pageId === "stars" ||
+                pageId === "gifts"
+            ) {
+
+                openPage("services");
+
+                return;
+            }
+
+
+            openPage("home");
         }
     );
 }
 
 
 // =========================================
-// DARK THEME
+// TOAST
+// =========================================
+
+let toastTimer = null;
+
+
+function showToast(message) {
+
+    if (!toast) {
+        return;
+    }
+
+
+    toast.textContent =
+        message;
+
+
+    toast.classList.add(
+        "show"
+    );
+
+
+    clearTimeout(
+        toastTimer
+    );
+
+
+    toastTimer =
+        setTimeout(
+            () => {
+
+                toast.classList.remove(
+                    "show"
+                );
+
+            },
+            2200
+        );
+}
+
+
+// =========================================
+// DARK MODE
 // =========================================
 
 document.documentElement.style.colorScheme =
@@ -403,10 +799,3 @@ document.documentElement.style.colorScheme =
 // =========================================
 
 openPage("home");
-
-
-// =========================================
-// START BACKEND SYNC
-// =========================================
-
-syncUserWithBackend();
