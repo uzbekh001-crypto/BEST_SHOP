@@ -1,196 +1,412 @@
-const tg = window.Telegram?.WebApp;
-const API_URL = "http://127.0.0.1:8000"; // Tunnel ishga tushganda o'zgartirishingiz mumkin
+const tg = window.Telegram.WebApp;
 
-let cachedProducts = [];
-let navigationHistory = ["home"];
+tg.ready();
+tg.expand();
 
-if (tg) {
-    tg.ready();
-    tg.expand();
-}
 
-async function initApp() {
-    const initData = tg?.initData;
-    if (initData) {
-        try {
-            const response = await fetch(`${API_URL}/api/auth`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "X-Init-Data": initData
-                }
-            });
+// =========================================
+// API
+// =========================================
 
-            if (response.ok) {
-                const data = await response.json();
-                renderUserData(data.user);
-            } else {
-                renderFallbackUser();
-            }
-        } catch (error) {
-            renderFallbackUser();
-        }
-    } else {
-        renderFallbackUser();
+const API_URL = "http://127.0.0.1:8000";
+
+
+// =========================================
+// TELEGRAM USER
+// =========================================
+
+const user = tg.initDataUnsafe?.user;
+
+
+// =========================================
+// UI USER DATA
+// =========================================
+
+if (user) {
+
+    const firstName =
+        user.first_name || "Foydalanuvchi";
+
+
+    // Greeting
+
+    const greeting =
+        document.getElementById("greeting");
+
+    if (greeting) {
+
+        greeting.textContent =
+            `Salom, ${firstName} 👋`;
     }
-    await loadProducts();
+
+
+    // Profile name
+
+    const profileName =
+        document.getElementById("profile-name");
+
+    if (profileName) {
+
+        const fullName =
+            `${user.first_name || ""} ${user.last_name || ""}`
+                .trim();
+
+        profileName.textContent =
+            fullName || "Foydalanuvchi";
+    }
+
+
+    // Username
+
+    const profileUsername =
+        document.getElementById("profile-username");
+
+    if (profileUsername) {
+
+        profileUsername.textContent =
+            user.username
+                ? `@${user.username}`
+                : "Username mavjud emas";
+    }
+
+
+    // Telegram ID
+
+    const profileId =
+        document.getElementById("profile-id");
+
+    if (profileId) {
+
+        profileId.textContent =
+            `Telegram ID: ${user.id || "—"}`;
+    }
+
+
+    // Avatar
+
+    if (user.photo_url) {
+
+        const avatar =
+            document.getElementById("avatar");
+
+        if (avatar) {
+
+            avatar.innerHTML =
+                `<img src="${user.photo_url}" alt="avatar">`;
+        }
+
+
+        const headerAvatar =
+            document.getElementById("header-avatar");
+
+        if (headerAvatar) {
+
+            headerAvatar.innerHTML =
+                `<img src="${user.photo_url}" alt="avatar">`;
+        }
+    }
 }
 
-function renderUserData(dbUser) {
-    const greeting = document.getElementById("greeting");
-    if (greeting) greeting.textContent = `Salom, ${dbUser.first_name || "Foydalanuvchi"} 👋`;
 
-    const profileName = document.getElementById("profile-name");
-    if (profileName) profileName.textContent = dbUser.first_name || "Foydalanuvchi";
+// =========================================
+// BACKEND USER SYNC
+// =========================================
 
-    const profileUsername = document.getElementById("profile-username");
-    if (profileUsername) profileUsername.textContent = dbUser.username ? `@${dbUser.username}` : "@username";
+async function syncUserWithBackend() {
 
-    const profileId = document.getElementById("profile-id");
-    if (profileId) profileId.textContent = `ID: ${dbUser.telegram_id}`;
-}
+    if (!tg.initData) {
 
-function renderFallbackUser() {
-    const user = tg?.initDataUnsafe?.user;
-    const firstName = user?.first_name || "Mehmon";
+        console.warn(
+            "Telegram initData mavjud emas."
+        );
 
-    const greeting = document.getElementById("greeting");
-    if (greeting) greeting.textContent = `Salom, ${firstName} 👋`;
+        return null;
+    }
 
-    const profileName = document.getElementById("profile-name");
-    if (profileName) profileName.textContent = firstName;
 
-    const profileUsername = document.getElementById("profile-username");
-    if (profileUsername) profileUsername.textContent = user?.username ? `@${user.username}` : "@user";
-
-    const profileId = document.getElementById("profile-id");
-    if (profileId) profileId.textContent = `ID: ${user?.id || "12345678"}`;
-}
-
-async function loadProducts() {
     try {
-        const response = await fetch(`${API_URL}/api/products`);
-        if (response.ok) {
-            const data = await response.json();
-            cachedProducts = data.products || [];
-            renderProductsToUI(cachedProducts);
+
+        const response =
+            await fetch(
+                `${API_URL}/api/users/me`,
+                {
+                    method: "GET",
+
+                    headers: {
+                        "X-Telegram-Init-Data":
+                            tg.initData
+                    }
+                }
+            );
+
+
+        if (!response.ok) {
+
+            const error =
+                await response.text();
+
+            throw new Error(
+                `Backend xatosi: ${error}`
+            );
         }
+
+
+        const data =
+            await response.json();
+
+
+        console.log(
+            "BEST SHOP user:",
+            data
+        );
+
+
+        return data;
+
     } catch (error) {
-        console.error("Mahsulotlar yuklanmadi:", error);
+
+        console.error(
+            "User backendga yuborilmadi:",
+            error
+        );
+
+        return null;
     }
 }
 
-function renderProductsToUI(products) {
-    const premiumContainer = document.getElementById("premium-options-list");
-    if (premiumContainer) {
-        const premiumProducts = products.filter(p => p.category === "premium");
-        if (premiumProducts.length > 0) {
-            premiumContainer.innerHTML = premiumProducts.map(prod => `
-                <button class="list-card" onclick="selectProduct(${prod.id})">
-                    <div class="list-icon premium-icon">💎</div>
-                    <div class="list-info">
-                        <h3>${prod.title}</h3>
-                        <p>${prod.price.toLocaleString('uz-UZ')} so'm</p>
-                    </div>
-                    <span class="list-arrow">→</span>
-                </button>
-            `).join('');
-        }
-    }
 
-    const gamesContainer = document.getElementById("games-options-list");
-    if (gamesContainer) {
-        const gameProducts = products.filter(p => p.category === "games");
-        if (gameProducts.length > 0) {
-            gamesContainer.innerHTML = gameProducts.map(prod => `
-                <button class="list-card" onclick="selectProduct(${prod.id})">
-                    <div class="list-icon">🎮</div>
-                    <div class="list-info">
-                        <h3>${prod.title}</h3>
-                        <p>${prod.price.toLocaleString('uz-UZ')} so'm</p>
-                    </div>
-                    <span class="list-arrow">→</span>
-                </button>
-            `).join('');
-        }
-    }
+// =========================================
+// NAVIGATION
+// =========================================
+
+const navButtons =
+    document.querySelectorAll(".nav-btn");
+
+const pages =
+    document.querySelectorAll(".page");
+
+
+function openPage(pageId) {
+
+    pages.forEach(page => {
+
+        page.classList.toggle(
+            "active",
+            page.id === pageId
+        );
+    });
+
+
+    navButtons.forEach(button => {
+
+        button.classList.toggle(
+            "active",
+            button.dataset.page === pageId
+        );
+    });
+
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
 }
 
-function selectProduct(productId) {
-    const product = cachedProducts.find(p => p.id === productId);
-    if (!product) return;
 
-    if (tg?.showConfirm) {
-        tg.showConfirm(`🛒 ${product.title}\n💰 Narxi: ${product.price.toLocaleString('uz-UZ')} so'm\n\nXaridni tasdiqlaysizmi?`, (confirmed) => {
-            if (confirmed && tg?.showAlert) {
-                tg.showAlert(`✅ Buyurtma qabul qilindi!`);
+navButtons.forEach(button => {
+
+    button.addEventListener(
+        "click",
+        () => {
+
+            const page =
+                button.dataset.page;
+
+            if (page) {
+
+                openPage(page);
             }
-        });
-    } else {
-        if (confirm(`🛒 ${product.title}\n💰 Narxi: ${product.price.toLocaleString('uz-UZ')} so'm\n\nXaridni tasdiqlaysizmi?`)) {
-            alert(`✅ Buyurtma qabul qilindi!`);
         }
-    }
-}
-
-function openPage(pageId, pushToHistory = true) {
-    const currentPage = navigationHistory[navigationHistory.length - 1];
-    if (pushToHistory && currentPage !== pageId) {
-        navigationHistory.push(pageId);
-    }
-
-    document.querySelectorAll(".page").forEach(page => {
-        page.classList.toggle("active", page.id === pageId);
-    });
-
-    document.querySelectorAll(".nav-btn").forEach(button => {
-        button.classList.toggle("active", button.dataset.page === pageId);
-    });
-
-    if (tg?.BackButton) {
-        pageId === "home" ? tg.BackButton.hide() : tg.BackButton.show();
-    }
-}
-
-function goBack() {
-    if (navigationHistory.length > 1) {
-        navigationHistory.pop();
-        openPage(navigationHistory[navigationHistory.length - 1], false);
-    } else {
-        openPage("home", false);
-    }
-}
-
-document.querySelectorAll(".nav-btn").forEach(button => {
-    button.addEventListener("click", (e) => {
-        e.preventDefault();
-        openPage(button.dataset.page);
-    });
+    );
 });
 
-document.addEventListener("click", (e) => {
-    const btn = e.target.closest("[data-action]");
-    if (btn) {
-        e.preventDefault();
-        const action = btn.dataset.action;
-        if (action === "premium") return openPage("premium");
-        if (action === "games") return openPage("games");
-        if (action === "stars" || action === "gifts") {
-            tg?.showAlert ? tg.showAlert("Tez orada ishga tushadi!") : alert("Tez orada ishga tushadi!");
+
+// =========================================
+// SERVICE ACTIONS
+// =========================================
+
+const actionButtons =
+    document.querySelectorAll("[data-action]");
+
+
+actionButtons.forEach(button => {
+
+    button.addEventListener(
+        "click",
+        () => {
+
+            const action =
+                button.dataset.action;
+
+
+            // PREMIUM
+
+            if (action === "premium") {
+
+                openPage("premium");
+
+                return;
+            }
+
+
+            // STARS
+
+            if (action === "stars") {
+
+                showComingSoon(
+                    "⭐ Telegram Stars",
+                    "Stars xarid qilish oynasi tez orada ishga tushadi."
+                );
+
+                return;
+            }
+
+
+            // GIFTS
+
+            if (action === "gifts") {
+
+                showComingSoon(
+                    "🎁 Telegram Gifts",
+                    "Gift xarid qilish oynasi tez orada ishga tushadi."
+                );
+
+                return;
+            }
+
+
+            // GAMES
+
+            if (action === "games") {
+
+                openPage("games");
+
+                return;
+            }
+
         }
-    }
-
-    if (e.target.closest(".back-button")) {
-        e.preventDefault();
-        goBack();
-    }
+    );
 });
 
-if (tg?.BackButton) {
-    tg.BackButton.onClick(goBack);
+
+// =========================================
+// PREMIUM BACK BUTTON
+// =========================================
+
+const backButtons =
+    document.querySelectorAll(".back-button");
+
+
+backButtons.forEach(button => {
+
+    button.addEventListener(
+        "click",
+        () => {
+
+            const page =
+                button.dataset.page;
+
+            if (page) {
+
+                openPage(page);
+            }
+        }
+    );
+});
+
+
+// =========================================
+// PREMIUM PLAN CLICK
+// =========================================
+
+const premiumPlans =
+    document.querySelectorAll(".premium-plan");
+
+
+premiumPlans.forEach(plan => {
+
+    plan.addEventListener(
+        "click",
+        () => {
+
+            showComingSoon(
+                "💎 Telegram Premium",
+                "Hozircha paket narxlari ulanmoqda."
+            );
+        }
+    );
+});
+
+
+// =========================================
+// TEMPORARY MESSAGE
+// =========================================
+
+function showComingSoon(
+    title,
+    message
+) {
+
+    if (tg.showAlert) {
+
+        tg.showAlert(
+            `${title}\n\n${message}`
+        );
+
+        return;
+    }
+
+
+    alert(
+        `${title}\n\n${message}`
+    );
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-    openPage("home", false);
-    initApp();
-});
+
+// =========================================
+// TELEGRAM BACK BUTTON
+// =========================================
+
+if (tg.BackButton) {
+
+    tg.BackButton.onClick(
+        () => {
+
+            openPage("home");
+
+            tg.BackButton.hide();
+        }
+    );
+}
+
+
+// =========================================
+// DARK THEME
+// =========================================
+
+document.documentElement.style.colorScheme =
+    "dark";
+
+
+// =========================================
+// START
+// =========================================
+
+openPage("home");
+
+
+// =========================================
+// START BACKEND SYNC
+// =========================================
+
+syncUserWithBackend();
