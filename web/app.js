@@ -1,6 +1,6 @@
 const tg = window.Telegram?.WebApp;
 
-// ⚠️ BU YERGA tunnel bergan HTTPS linkni qo'yasan (oxirida slasx "/" bo'lmasin)
+// ⚠️ ngrok HTTPS havolangiz
 const API_URL = "https://cauterize-maritime-showroom.ngrok-free.dev"; 
 
 if (tg) {
@@ -12,7 +12,6 @@ if (tg) {
 async function initApp() {
     const initData = tg?.initData;
 
-    // Telegram ichida ochilgan bo'lsa, backendga xavfsiz so'rov yuboramiz
     if (initData) {
         try {
             const response = await fetch(`${API_URL}/api/auth`, {
@@ -27,7 +26,6 @@ async function initApp() {
                 const data = await response.json();
                 renderUserData(data.user);
             } else {
-                console.warn("Backend auth xatosi, mahalliy ma'lumotlar ishlatilmoqda.");
                 renderFallbackUser();
             }
         } catch (error) {
@@ -35,15 +33,14 @@ async function initApp() {
             renderFallbackUser();
         }
     } else {
-        // Brauzerda test qilganda
         renderFallbackUser();
     }
 
-    // Mahsulotlarni bazadan yuklab olish
+    // Mahsulotlarni bazadan olib kelish
     loadProducts();
 }
 
-// User ma'lumotlarini ekranga chiqarish (Backend orqali)
+// User ma'lumotlarini ekranga chiqarish
 function renderUserData(dbUser) {
     const greeting = document.getElementById("greeting");
     if (greeting) greeting.textContent = `Salom, ${dbUser.first_name || "Foydalanuvchi"} 👋`;
@@ -71,7 +68,6 @@ function renderUserData(dbUser) {
     }
 }
 
-// Telegram tashqarisida (Brauzerda) test qilish uchun
 function renderFallbackUser() {
     const user = tg?.initDataUnsafe?.user;
     const firstName = user?.first_name || "Mehmon";
@@ -89,64 +85,40 @@ function renderFallbackUser() {
     if (profileId) profileId.textContent = `Telegram ID: ${user?.id || "12345678"}`;
 }
 
-// 2. Mahsulot va Xizmatlarni backend serverdan yuklash va ekranga chiqarish
+// 2. Mahsulotlarni yuklash (Dizaynni buzmasdan)
 async function loadProducts() {
     try {
         const response = await fetch(`${API_URL}/api/products`);
         if (response.ok) {
             const data = await response.json();
-            const products = data.products || data; // backend javob strukturasiga moslash
-            renderProducts(products);
+            console.log("Bazadagi mahsulotlar:", data);
         }
     } catch (error) {
         console.error("Mahsulotlarni olishda xatolik:", error);
     }
 }
 
-// Mahsulotlarni HTML ga joylash
-function renderProducts(products) {
-    const container = document.getElementById("products-list") || document.getElementById("services-grid");
-    
-    if (!container) return;
-
-    if (!products || products.length === 0) {
-        container.innerHTML = "<p style='text-align:center; padding: 20px;'>Hozircha mahsulotlar mavjud emas.</p>";
-        return;
-    }
-
-    container.innerHTML = products.map(item => `
-        <div class="card" onclick="buyProduct(${item.id})">
-            <div class="card-title">${item.title || item.name}</div>
-            <div class="card-price">${item.price} so'm</div>
-            <button class="buy-btn">Sotib olish</button>
-        </div>
-    `).join('');
-}
-
-// Sotib olish harakatini boshqarish
-async function buyProduct(productId) {
-    if (tg?.showConfirm) {
-        tg.showConfirm("Ushbu mahsulotni sotib olishni tasdiqlaysizmi?", async (confirmed) => {
-            if (confirmed) {
-                showComingSoon("Xarid", "Xarid so'rovi yuborildi!");
-            }
-        });
-    } else {
-        showComingSoon("Xarid", "Xarid so'rovi yuborildi!");
-    }
-}
-
-// Page Navigation Logic
+// 3. Sahifalar o'rtasida o'tish (Page Navigation Logic)
 const navButtons = document.querySelectorAll(".nav-btn");
 const pages = document.querySelectorAll(".page");
 
 function openPage(pageId) {
     pages.forEach(page => {
-        page.classList.toggle("active", page.id === pageId);
+        if (page.id === pageId) {
+            page.classList.add("active");
+            page.style.display = "block";
+        } else {
+            page.classList.remove("active");
+            page.style.display = "none";
+        }
     });
 
     navButtons.forEach(button => {
-        button.classList.toggle("active", button.dataset.page === pageId);
+        if (button.dataset.page === pageId) {
+            button.classList.add("active");
+        } else {
+            button.classList.remove("active");
+        }
     });
 
     if (tg?.BackButton) {
@@ -160,17 +132,20 @@ function openPage(pageId) {
     window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
+// Navigatsiya tugmalariga hodisa biriktirish
 navButtons.forEach(button => {
-    button.addEventListener("click", () => {
+    button.addEventListener("click", (e) => {
+        e.preventDefault();
         const page = button.dataset.page;
         if (page) openPage(page);
     });
 });
 
-// Service Actions Handler
+// Xizmatlar tugmalariga hodisa biriktirish
 const actionButtons = document.querySelectorAll("[data-action]");
 actionButtons.forEach(button => {
-    button.addEventListener("click", () => {
+    button.addEventListener("click", (e) => {
+        e.preventDefault();
         const action = button.dataset.action;
         if (action === "premium") return openPage("premium");
         if (action === "games") return openPage("games");
@@ -183,10 +158,11 @@ actionButtons.forEach(button => {
     });
 });
 
-// Back Buttons
+// Orqaga qaytish tugmalari
 const backButtons = document.querySelectorAll(".back-button");
 backButtons.forEach(button => {
-    button.addEventListener("click", () => {
+    button.addEventListener("click", (e) => {
+        e.preventDefault();
         const page = button.dataset.page;
         if (page) openPage(page);
     });
@@ -199,7 +175,7 @@ if (tg?.BackButton) {
     });
 }
 
-// Temporary Alert Helper
+// Ogohlantirish oynasi
 function showComingSoon(title, message) {
     if (tg?.showAlert) {
         tg.showAlert(`${title}\n\n${message}`);
@@ -208,7 +184,9 @@ function showComingSoon(title, message) {
     }
 }
 
-// Initializing Theme and View
-document.documentElement.style.colorScheme = "dark";
-openPage("home");
-initApp();
+// Ilovani ishga tushirish va Bosh sahifani ko'rsatish
+document.addEventListener("DOMContentLoaded", () => {
+    document.documentElement.style.colorScheme = "dark";
+    openPage("home");
+    initApp();
+});
