@@ -2,7 +2,7 @@ import os
 from dotenv import load_dotenv
 from telegram import Update, KeyboardButton, ReplyKeyboardMarkup, WebAppInfo
 from telegram.ext import Application, CommandHandler, ContextTypes
-
+dir
 load_dotenv()
 
 BOT_TOKEN = os.getenv("BOT_TOKEN")
