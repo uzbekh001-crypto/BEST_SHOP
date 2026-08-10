@@ -1,17 +1,41 @@
-const tg = window.Telegram?.WebApp;
+
+// =========================================
+// 🎮 DONAT KANALLARI
+// URL'LARNI FAQAT SHU YERDAN O'ZGARTIRING
+// =========================================
+
+const DONAT_CHANNELS = {
+
+    pubg:
+        "https://t.me/cwfamily",
+
+    efootball:
+        "https://t.me/cwfamily",
+
+    brawlStars:
+        "https://t.me/cwfamily",
+
+    other:
+        "https://t.me/cwfamily"
+
+};
 
 
 // =========================================
 // TELEGRAM
 // =========================================
 
+const tg = window.Telegram?.WebApp;
+
 if (tg) {
+
     tg.ready();
     tg.expand();
 
     if (tg.enableClosingConfirmation) {
         tg.enableClosingConfirmation();
     }
+
 }
 
 
@@ -57,6 +81,7 @@ function setupTelegramUser() {
 
         greeting.textContent =
             `Salom, ${firstName} 👋`;
+
     }
 
 
@@ -73,6 +98,7 @@ function setupTelegramUser() {
 
         profileName.textContent =
             fullName || "Foydalanuvchi";
+
     }
 
 
@@ -91,6 +117,7 @@ function setupTelegramUser() {
 
         profileUsername.textContent =
             username;
+
     }
 
 
@@ -103,6 +130,7 @@ function setupTelegramUser() {
 
         profileId.textContent =
             `Telegram ID: ${user.id || "—"}`;
+
     }
 
 
@@ -131,6 +159,7 @@ function setupTelegramUser() {
                 "avatar";
 
             avatar.appendChild(img);
+
         }
 
 
@@ -148,8 +177,11 @@ function setupTelegramUser() {
                 "avatar";
 
             headerAvatar.appendChild(img);
+
         }
+
     }
+
 }
 
 
@@ -176,6 +208,7 @@ function openPage(pageId) {
             "active",
             page.id === pageId
         );
+
     });
 
 
@@ -185,6 +218,7 @@ function openPage(pageId) {
             "active",
             button.dataset.page === pageId
         );
+
     });
 
 
@@ -195,6 +229,7 @@ function openPage(pageId) {
 
 
     updateTelegramBackButton(pageId);
+
 }
 
 
@@ -220,7 +255,9 @@ function updateTelegramBackButton(pageId) {
     } else {
 
         tg.BackButton.show();
+
     }
+
 }
 
 
@@ -240,9 +277,12 @@ navButtons.forEach(button => {
             if (page) {
 
                 openPage(page);
+
             }
+
         }
     );
+
 });
 
 
@@ -269,9 +309,12 @@ document
                 if (page) {
 
                     openPage(page);
+
                 }
+
             }
         );
+
     });
 
 
@@ -296,6 +339,7 @@ document
                     openPage("premium");
 
                     return;
+
                 }
 
 
@@ -304,6 +348,7 @@ document
                     openPage("stars");
 
                     return;
+
                 }
 
 
@@ -312,9 +357,12 @@ document
                     openPage("gifts");
 
                     return;
+
                 }
+
             }
         );
+
     });
 
 
@@ -338,6 +386,7 @@ document
                     `${months} oylik Premium tanlandi`
                 );
 
+
                 /*
                  * PAYMENT / ORDER
                  * keyin shu joyga ulanadi.
@@ -345,8 +394,10 @@ document
                  * Hozircha mavjud invoice
                  * tizimiga tegilmaydi.
                  */
+
             }
         );
+
     });
 
 
@@ -381,6 +432,7 @@ starsButtons.forEach(button => {
                     item.classList.remove(
                         "selected"
                     );
+
                 }
             );
 
@@ -400,9 +452,12 @@ starsButtons.forEach(button => {
 
                 selectedStarsElement.textContent =
                     `${selectedStars} ⭐`;
+
             }
+
         }
     );
+
 });
 
 
@@ -439,6 +494,7 @@ if (starsContinue) {
                 input?.focus();
 
                 return;
+
             }
 
 
@@ -449,12 +505,14 @@ if (starsContinue) {
                 );
 
                 return;
+
             }
 
 
             showToast(
                 `@${username} uchun ${selectedStars} ⭐ tanlandi`
             );
+
 
             /*
              * Keyinchalik:
@@ -463,8 +521,10 @@ if (starsContinue) {
              * payment
              * shu yerga ulanadi.
              */
+
         }
     );
+
 }
 
 
@@ -496,17 +556,20 @@ document
                     `${name} — ${price}`
                 );
 
+
                 /*
                  * Keyinchalik gift order
                  * tizimiga ulanadi.
                  */
+
             }
         );
+
     });
 
 
 // =========================================
-// GAMES
+// 🎮 GAMES / DONAT
 // =========================================
 
 document
@@ -521,13 +584,89 @@ document
                     game.dataset.game;
 
 
-                showToast(
-                    `${gameName} donat xizmati tez orada`
-                );
+                let channelUrl = null;
+
+
+                // PUBG Mobile
+
+                if (
+                    gameName === "PUBG Mobile"
+                ) {
+
+                    channelUrl =
+                        DONAT_CHANNELS.pubg;
+
+                }
+
+
+                // eFootball
+
+                if (
+                    gameName === "eFootball"
+                ) {
+
+                    channelUrl =
+                        DONAT_CHANNELS.efootball;
+
+                }
+
+
+                // Brawl Stars
+
+                if (
+                    gameName === "Brawl Stars"
+                ) {
+
+                    channelUrl =
+                        DONAT_CHANNELS.brawlStars;
+
+                }
+
+
+                // URL tekshirish
+
+                if (
+                    !channelUrl ||
+                    channelUrl.startsWith(
+                        "BU_YERGA_"
+                    )
+                ) {
+
+                    showToast(
+                        "Bu o‘yin kanali hali sozlanmagan"
+                    );
+
+                    return;
+
+                }
+
+
+                // Telegram kanalini ochish
+
+                if (tg?.openTelegramLink) {
+
+                    tg.openTelegramLink(
+                        channelUrl
+                    );
+
+                } else {
+
+                    window.open(
+                        channelUrl,
+                        "_blank"
+                    );
+
+                }
+
             }
         );
+
     });
 
+
+// =========================================
+// 🎮 BOSHQA O'YINLAR
+// =========================================
 
 const otherGames =
     document.getElementById(
@@ -541,11 +680,44 @@ if (otherGames) {
         "click",
         () => {
 
-            showToast(
-                "Boshqa o‘yinlar tez orada qo‘shiladi"
-            );
+            const channelUrl =
+                DONAT_CHANNELS.other;
+
+
+            if (
+                !channelUrl ||
+                channelUrl.startsWith(
+                    "BU_YERGA_"
+                )
+            ) {
+
+                showToast(
+                    "Boshqa o‘yinlar kanali hali sozlanmagan"
+                );
+
+                return;
+
+            }
+
+
+            if (tg?.openTelegramLink) {
+
+                tg.openTelegramLink(
+                    channelUrl
+                );
+
+            } else {
+
+                window.open(
+                    channelUrl,
+                    "_blank"
+                );
+
+            }
+
         }
     );
+
 }
 
 
@@ -566,8 +738,10 @@ if (profileButton) {
         () => {
 
             openPage("profile");
+
         }
     );
+
 }
 
 
@@ -605,6 +779,7 @@ document
 
                     help:
                         "Yordam bo‘limi tez orada"
+
                 };
 
 
@@ -612,8 +787,10 @@ document
                     messages[type] ||
                     "Tez orada"
                 );
+
             }
         );
+
     });
 
 
@@ -622,8 +799,8 @@ document
 // =========================================
 
 const telegramProfile =
-    document.getElementById(
-        "telegram-profile"
+    document.querySelector(
+        "#telegram-profile"
     );
 
 
@@ -640,6 +817,7 @@ if (telegramProfile) {
                 );
 
                 return;
+
             }
 
 
@@ -657,9 +835,12 @@ if (telegramProfile) {
 
                 window.location.href =
                     url;
+
             }
+
         }
     );
+
 }
 
 
@@ -701,9 +882,12 @@ if (bestshopChannel) {
                     channelUrl,
                     "_blank"
                 );
+
             }
+
         }
     );
+
 }
 
 
@@ -735,12 +919,15 @@ if (tg?.BackButton) {
                 openPage("services");
 
                 return;
+
             }
 
 
             openPage("home");
+
         }
     );
+
 }
 
 
@@ -783,6 +970,7 @@ function showToast(message) {
             },
             2200
         );
+
 }
 
 
