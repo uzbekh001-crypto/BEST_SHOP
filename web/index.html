@@ -1,1155 +1,1779 @@
-<!DOCTYPE html>
-<html lang="uz">
-<head>
-    <meta charset="UTF-8">
+```html
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-    >
+<meta name="theme-color" content="#050810">
 
-    <meta name="theme-color" content="#050810">
+<title>BEST SHOP</title>
 
-    <title>BEST SHOP</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
 
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+<link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+>
 
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-        rel="stylesheet"
-    >
+<link rel="stylesheet" href="style.css">
 
-    <link rel="stylesheet" href="style.css">
-</head>
 
-<body>
+<!-- ================= TOP GLOW ================= -->
 
-<div class="app">
+<div class="ambient ambient-one"></div>
+<div class="ambient ambient-two"></div>
 
-    <!-- ================= TOP GLOW ================= -->
 
-    <div class="ambient ambient-one"></div>
-    <div class="ambient ambient-two"></div>
+<!-- ================= CONTENT ================= -->
 
+<main class="content">
 
-    <!-- ================= CONTENT ================= -->
 
-    <main class="content">
+<!-- ================= HOME ================= -->
 
-        <!-- ================= HOME ================= -->
+<section id="home" class="page active">
 
-        <section id="home" class="page active">
+    <header class="top-header">
 
-            <header class="top-header">
+        <div class="header-left">
 
-                <div class="header-left">
+            <span class="hello">
+                Xush kelibsiz
+            </span>
 
-                    <span class="hello">
-                        Xush kelibsiz
-                    </span>
+            <h1>
+                BEST <span>SHOP</span>
+            </h1>
 
-                    <h1>
-                        BEST <span>SHOP</span>
-                    </h1>
+            <p id="greeting">
+                Salom 👋
+            </p>
 
-                    <p id="greeting">
-                        Salom 👋
-                    </p>
+        </div>
 
-                </div>
-
-                <button
-                    class="avatar-button"
-                    id="header-avatar"
-                    data-profile
-                >
-                    👤
-                </button>
-
-            </header>
-
-
-            <!-- ================= MARKET TICKER ================= -->
-
-            <div class="market-wrapper">
-
-                <div class="market-label">
-                    <span class="live-dot"></span>
-                    LIVE
-                </div>
-
-                <div class="market">
-
-                    <div class="market-track">
-
-                        <div class="market-item">
-                            🇺🇸 <b>USD</b>
-                            <span>12 340 so‘m</span>
-                        </div>
-
-                        <i>•</i>
-
-                        <div class="market-item">
-                            🇪🇺 <b>EUR</b>
-                            <span>14 350 so‘m</span>
-                        </div>
-
-                        <i>•</i>
-
-                        <div class="market-item">
-                            🇬🇧 <b>GBP</b>
-                            <span>16 700 so‘m</span>
-                        </div>
-
-                        <i>•</i>
-
-                        <div class="market-item">
-                            🇷🇺 <b>RUB</b>
-                            <span>155 so‘m</span>
-                        </div>
-
-                        <i>•</i>
-
-                        <div class="market-item">
-                            🇨🇳 <b>CNY</b>
-                            <span>1 720 so‘m</span>
-                        </div>
-
-                        <i>•</i>
-
-                        <div class="market-item">
-                            🇺🇸 <b>USD</b>
-                            <span>12 340 so‘m</span>
-                        </div>
-
-                        <i>•</i>
-
-                        <div class="market-item">
-                            🇪🇺 <b>EUR</b>
-                            <span>14 350 so‘m</span>
-                        </div>
-
-                        <i>•</i>
-
-                        <div class="market-item">
-                            🇬🇧 <b>GBP</b>
-                            <span>16 700 so‘m</span>
-                        </div>
-
-                        <i>•</i>
-
-                        <div class="market-item">
-                            🇷🇺 <b>RUB</b>
-                            <span>155 so‘m</span>
-                        </div>
-
-                        <i>•</i>
-
-                        <div class="market-item">
-                            🇨🇳 <b>CNY</b>
-                            <span>1 720 so‘m</span>
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- ================= NEWS ================= -->
-
-            <div class="news-bar">
-
-                <div class="news-badge">
-                    NEWS
-                </div>
-
-                <div class="news-window">
-
-                    <div class="news-track">
-
-                        <span>
-                            ⚡ BEST SHOP — tezkor va xavfsiz xizmatlar
-                        </span>
-
-                        <span>
-                            💎 Telegram Premium paketlari mavjud
-                        </span>
-
-                        <span>
-                            🎮 O‘yinlarga donat xizmatlari tez orada
-                        </span>
-
-                        <span>
-                            🎁 Telegram Gifts xizmatlari mavjud
-                        </span>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- ================= HERO ================= -->
-
-            <div class="hero-card">
-
-                <div class="hero-glow"></div>
-
-                <div class="hero-content">
-
-                    <span class="hero-small">
-                        PREMIUM XIZMATLAR
-                    </span>
-
-                    <h2>
-                        Hammasi<br>
-                        <span>bir joyda.</span>
-                    </h2>
-
-                    <p>
-                        Telegram va o‘yin xizmatlarini
-                        tez va qulay xarid qiling.
-                    </p>
-
-                    <button
-                        class="primary-button"
-                        data-page="services"
-                    >
-                        Xizmatlarni ko‘rish
-                        <span>→</span>
-                    </button>
-
-                </div>
-
-                <div class="hero-orb">
-                    💎
-                </div>
-
-            </div>
-
-
-            <!-- ================= QUICK SERVICES ================= -->
-
-            <div class="section-top">
-
-                <div>
-                    <span class="eyebrow">
-                        XIZMATLAR
-                    </span>
-
-                    <h2>
-                        Mashhur xizmatlar
-                    </h2>
-                </div>
-
-                <button
-                    class="text-button"
-                    data-page="services"
-                >
-                    Barchasi →
-                </button>
-
-            </div>
-
-
-            <div class="quick-grid">
-
-                <button
-                    class="quick-card premium-card"
-                    data-service="premium"
-                >
-                    <div class="quick-icon">
-                        💎
-                    </div>
-
-                    <strong>
-                        Premium
-                    </strong>
-
-                    <small>
-                        Telegram
-                    </small>
-
-                    <span class="quick-arrow">
-                        →
-                    </span>
-                </button>
-
-
-                <button
-                    class="quick-card stars-card"
-                    data-service="stars"
-                >
-                    <div class="quick-icon">
-                        ⭐
-                    </div>
-
-                    <strong>
-                        Stars
-                    </strong>
-
-                    <small>
-                        Telegram
-                    </small>
-
-                    <span class="quick-arrow">
-                        →
-                    </span>
-                </button>
-
-
-                <button
-                    class="quick-card gift-card"
-                    data-service="gifts"
-                >
-                    <div class="quick-icon">
-                        🎁
-                    </div>
-
-                    <strong>
-                        Gifts
-                    </strong>
-
-                    <small>
-                        Telegram
-                    </small>
-
-                    <span class="quick-arrow">
-                        →
-                    </span>
-                </button>
-
-
-                <button
-                    class="quick-card game-card"
-                    data-page="games"
-                >
-                    <div class="quick-icon">
-                        🎮
-                    </div>
-
-                    <strong>
-                        Donat
-                    </strong>
-
-                    <small>
-                        O‘yinlar
-                    </small>
-
-                    <span class="quick-arrow">
-                        →
-                    </span>
-                </button>
-
-            </div>
-
-
-            <!-- ================= TRUST ================= -->
-
-            <div class="trust-strip">
-
-                <div>
-                    <span>🔐</span>
-                    <small>Xavfsiz</small>
-                </div>
-
-                <div>
-                    <span>⚡</span>
-                    <small>Tezkor</small>
-                </div>
-
-                <div>
-                    <span>✓</span>
-                    <small>Ishonchli</small>
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- ================= SERVICES ================= -->
-
-        <section id="services" class="page">
-
-            <div class="page-head">
-
-                <span class="eyebrow">
-                    BEST SHOP
-                </span>
-
-                <h1>
-                    Xizmatlar
-                </h1>
-
-                <p>
-                    Kerakli xizmatni tanlang
-                </p>
-
-            </div>
-
-
-            <div class="service-list">
-
-                <button
-                    class="service-row"
-                    data-service="premium"
-                >
-
-                    <div class="service-row-icon">
-                        💎
-                    </div>
-
-                    <div class="service-row-info">
-
-                        <strong>
-                            Telegram Premium
-                        </strong>
-
-                        <span>
-                            1, 3, 6 va 12 oylik paketlar
-                        </span>
-
-                    </div>
-
-                    <b>→</b>
-
-                </button>
-
-
-                <button
-                    class="service-row"
-                    data-service="stars"
-                >
-
-                    <div class="service-row-icon">
-                        ⭐
-                    </div>
-
-                    <div class="service-row-info">
-
-                        <strong>
-                            Telegram Stars
-                        </strong>
-
-                        <span>
-                            Kerakli miqdorni tanlang
-                        </span>
-
-                    </div>
-
-                    <b>→</b>
-
-                </button>
-
-
-                <button
-                    class="service-row"
-                    data-service="gifts"
-                >
-
-                    <div class="service-row-icon">
-                        🎁
-                    </div>
-
-                    <div class="service-row-info">
-
-                        <strong>
-                            Telegram Gifts
-                        </strong>
-
-                        <span>
-                            Giftlar katalogini ko‘ring
-                        </span>
-
-                    </div>
-
-                    <b>→</b>
-
-                </button>
-
-            </div>
-
-
-            <div class="info-card">
-
-                <span>✨</span>
-
-                <div>
-                    <strong>
-                        Yangi xizmatlar
-                    </strong>
-
-                    <p>
-                        BEST SHOP doimiy ravishda
-                        yangi xizmatlarni qo‘shib boradi.
-                    </p>
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- ================= PREMIUM ================= -->
-
-        <section id="premium" class="page sub-page">
-
-            <button
-                class="back-button"
-                data-page="services"
-            >
-                <span>←</span>
-                Xizmatlar
-            </button>
-
-
-            <div class="page-head">
-
-                <span class="eyebrow">
-                    TELEGRAM
-                </span>
-
-                <h1>
-                    Premium
-                </h1>
-
-                <p>
-                    Premium muddatini tanlang
-                </p>
-
-            </div>
-
-
-            <div class="premium-list">
-
-                <button
-                    class="premium-plan"
-                    data-plan="1"
-                >
-
-                    <div class="plan-icon">
-                        💎
-                    </div>
-
-                    <div class="plan-main">
-                        <strong>1 oy</strong>
-                        <span>Telegram Premium</span>
-                    </div>
-
-                    <div class="plan-price">
-                        <small>Narx</small>
-                        <b>—</b>
-                    </div>
-
-                </button>
-
-
-                <button
-                    class="premium-plan"
-                    data-plan="3"
-                >
-
-                    <div class="plan-icon">
-                        💎
-                    </div>
-
-                    <div class="plan-main">
-                        <strong>3 oy</strong>
-                        <span>Telegram Premium</span>
-                    </div>
-
-                    <div class="plan-price">
-                        <small>Narx</small>
-                        <b>—</b>
-                    </div>
-
-                </button>
-
-
-                <button
-                    class="premium-plan"
-                    data-plan="6"
-                >
-
-                    <div class="plan-icon">
-                        💎
-                    </div>
-
-                    <div class="plan-main">
-                        <strong>6 oy</strong>
-                        <span>Telegram Premium</span>
-                    </div>
-
-                    <div class="plan-price">
-                        <small>Narx</small>
-                        <b>—</b>
-                    </div>
-
-                </button>
-
-
-                <button
-                    class="premium-plan popular"
-                    data-plan="12"
-                >
-
-                    <div class="popular-badge">
-                        ENG MASHHUR
-                    </div>
-
-                    <div class="plan-icon">
-                        💎
-                    </div>
-
-                    <div class="plan-main">
-                        <strong>12 oy</strong>
-                        <span>Telegram Premium</span>
-                    </div>
-
-                    <div class="plan-price">
-                        <small>Narx</small>
-                        <b>—</b>
-                    </div>
-
-                </button>
-
-            </div>
-
-
-            <div class="secure-card">
-
-                <span>🔐</span>
-
-                <div>
-                    <strong>
-                        Xavfsiz xarid
-                    </strong>
-
-                    <p>
-                        To‘lovlar xavfsiz tizim orqali amalga oshiriladi.
-                    </p>
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- ================= STARS ================= -->
-
-        <section id="stars" class="page sub-page">
-
-            <button
-                class="back-button"
-                data-page="services"
-            >
-                <span>←</span>
-                Xizmatlar
-            </button>
-
-
-            <div class="page-head">
-
-                <span class="eyebrow">
-                    TELEGRAM
-                </span>
-
-                <h1>
-                    ⭐ Stars
-                </h1>
-
-                <p>
-                    Stars yuboriladigan foydalanuvchini kiriting
-                </p>
-
-            </div>
-
-
-            <div class="form-card">
-
-                <label>
-                    Telegram username
-                </label>
-
-                <div class="input-box">
-
-                    <span>@</span>
-
-                    <input
-                        type="text"
-                        id="stars-username"
-                        placeholder="username"
-                        autocomplete="off"
-                    >
-
-                </div>
-
-
-                <label>
-                    Stars miqdori
-                </label>
-
-                <div class="stars-grid">
-
-                    <button data-stars="50">
-                        50 ⭐
-                    </button>
-
-                    <button data-stars="100">
-                        100 ⭐
-                    </button>
-
-                    <button data-stars="250">
-                        250 ⭐
-                    </button>
-
-                    <button data-stars="500">
-                        500 ⭐
-                    </button>
-
-                    <button data-stars="1000">
-                        1000 ⭐
-                    </button>
-
-                    <button data-stars="2500">
-                        2500 ⭐
-                    </button>
-
-                </div>
-
-
-                <div class="selected-stars">
-                    <span>
-                        Tanlangan:
-                    </span>
-
-                    <strong id="selected-stars">
-                        0 ⭐
-                    </strong>
-                </div>
-
-
-                <button
-                    class="primary-button full"
-                    id="stars-continue"
-                >
-                    Davom etish
-                    <span>→</span>
-                </button>
-
-            </div>
-
-        </section>
-
-
-        <!-- ================= GIFTS ================= -->
-
-        <section id="gifts" class="page sub-page">
-
-            <button
-                class="back-button"
-                data-page="services"
-            >
-                <span>←</span>
-                Xizmatlar
-            </button>
-
-
-            <div class="page-head">
-
-                <span class="eyebrow">
-                    TELEGRAM
-                </span>
-
-                <h1>
-                    🎁 Gifts
-                </h1>
-
-                <p>
-                    O‘zingizga yoqqan giftni tanlang
-                </p>
-
-            </div>
-
-
-            <div class="gift-grid">
-
-                <button class="gift-item">
-                    <span class="gift-image">🎁</span>
-                    <strong>Gift</strong>
-                    <small>15 ⭐</small>
-                </button>
-
-                <button class="gift-item">
-                    <span class="gift-image">🎀</span>
-                    <strong>Ribbon</strong>
-                    <small>25 ⭐</small>
-                </button>
-
-                <button class="gift-item">
-                    <span class="gift-image">💝</span>
-                    <strong>Heart</strong>
-                    <small>50 ⭐</small>
-                </button>
-
-                <button class="gift-item">
-                    <span class="gift-image">🌹</span>
-                    <strong>Rose</strong>
-                    <small>75 ⭐</small>
-                </button>
-
-                <button class="gift-item">
-                    <span class="gift-image">💎</span>
-                    <strong>Diamond</strong>
-                    <small>100 ⭐</small>
-                </button>
-
-                <button class="gift-item">
-                    <span class="gift-image">🏆</span>
-                    <strong>Award</strong>
-                    <small>250 ⭐</small>
-                </button>
-
-            </div>
-
-        </section>
-
-
-        <!-- ================= GAMES ================= -->
-
-        <section id="games" class="page">
-
-            <div class="page-head">
-
-                <span class="eyebrow">
-                    GAMING
-                </span>
-
-                <h1>
-                    Donat
-                </h1>
-
-                <p>
-                    Sevimli o‘yiningizni tanlang
-                </p>
-
-            </div>
-
-
-            <div class="game-list">
-
-                <button
-                    class="game-row"
-                    data-game="PUBG Mobile"
-                >
-
-                    <div class="game-logo pubg">
-                        🎯
-                    </div>
-
-                    <div>
-                        <strong>
-                            PUBG Mobile
-                        </strong>
-
-                        <span>
-                            UC xarid qilish
-                        </span>
-                    </div>
-
-                    <b>→</b>
-
-                </button>
-
-
-                <button
-                    class="game-row"
-                    data-game="eFootball"
-                >
-
-                    <div class="game-logo football">
-                        ⚽
-                    </div>
-
-                    <div>
-                        <strong>
-                            eFootball
-                        </strong>
-
-                        <span>
-                            Coin xarid qilish
-                        </span>
-                    </div>
-
-                    <b>→</b>
-
-                </button>
-
-
-                <button
-                    class="game-row"
-                    data-game="Brawl Stars"
-                >
-
-                    <div class="game-logo brawl">
-                        ⭐
-                    </div>
-
-                    <div>
-                        <strong>
-                            Brawl Stars
-                        </strong>
-
-                        <span>
-                            Gems xarid qilish
-                        </span>
-                    </div>
-
-                    <b>→</b>
-
-                </button>
-
-            </div>
-
-
-            <button
-                class="other-games"
-                id="other-games"
-            >
-                <span>🎮</span>
-
-                <div>
-                    <strong>
-                        Boshqa o‘yinlar
-                    </strong>
-
-                    <small>
-                        Ko‘proq o‘yinlar tez orada
-                    </small>
-                </div>
-
-                <b>→</b>
-            </button>
-
-        </section>
-
-
-        <!-- ================= PROFILE ================= -->
-
-        <section id="profile" class="page">
-
-            <div class="profile-top">
-
-                <div
-                    class="profile-avatar"
-                    id="avatar"
-                >
-                    👤
-                </div>
-
-                <h1 id="profile-name">
-                    Foydalanuvchi
-                </h1>
-
-                <p id="profile-username">
-                    @username
-                </p>
-
-                <div
-                    class="telegram-id"
-                    id="profile-id"
-                >
-                    Telegram ID: —
-                </div>
-
-            </div>
-
-
-            <div class="profile-menu">
-
-                <button
-                    class="profile-row"
-                    data-profile-page="orders"
-                >
-                    <span>📦</span>
-
-                    <div>
-                        <strong>
-                            Buyurtmalarim
-                        </strong>
-
-                        <small>
-                            Xaridlar tarixi
-                        </small>
-                    </div>
-
-                    <b>→</b>
-                </button>
-
-
-                <button
-                    class="profile-row"
-                    data-profile-page="bonus"
-                >
-                    <span>🎁</span>
-
-                    <div>
-                        <strong>
-                            Bonuslar
-                        </strong>
-
-                        <small>
-                            Bonuslaringiz
-                        </small>
-                    </div>
-
-                    <b>→</b>
-                </button>
-
-
-                <button
-                    class="profile-row"
-                    data-profile-page="referral"
-                >
-                    <span>👥</span>
-
-                    <div>
-                        <strong>
-                            Referal
-                        </strong>
-
-                        <small>
-                            Do‘stlaringizni taklif qiling
-                        </small>
-                    </div>
-
-                    <b>→</b>
-                </button>
-
-
-                <button
-                    class="profile-row"
-                    data-profile-page="settings"
-                >
-                    <span>⚙️</span>
-
-                    <div>
-                        <strong>
-                            Sozlamalar
-                        </strong>
-
-                        <small>
-                            Til va ilova sozlamalari
-                        </small>
-                    </div>
-
-                    <b>→</b>
-                </button>
-
-
-                <button
-                    class="profile-row"
-                    data-profile-page="help"
-                >
-                    <span>💬</span>
-
-                    <div>
-                        <strong>
-                            Yordam
-                        </strong>
-
-                        <small>
-                            Savollar va yordam
-                        </small>
-                    </div>
-
-                    <b>→</b>
-                </button>
-
-            </div>
-
-
-            <div class="profile-links">
-
-                <button id="telegram-profile">
-                    <span>✈️</span>
-                    Telegram profilim
-                </button>
-
-                <button id="bestshop-channel">
-                    <span>📢</span>
-                    BEST SHOP kanali
-                </button>
-
-            </div>
-
-
-            <div class="profile-version">
-                BEST SHOP • v1.0
-            </div>
-
-        </section>
-
-    </main>
-
-
-    <!-- ================= BOTTOM NAV ================= -->
-
-    <nav class="bottom-nav">
 
         <button
-            class="nav-btn active"
-            data-page="home"
+            class="avatar-button"
+            id="header-avatar"
+            data-profile
         >
-            <span>⌂</span>
-            <small>Bosh sahifa</small>
+            👤
         </button>
 
+    </header>
+
+
+    <!-- ================= MARKET TICKER ================= -->
+
+    <div class="market-wrapper">
+
+        <div class="market-label">
+            <span class="live-dot"></span>
+            LIVE
+        </div>
+
+        <div class="market">
+
+            <div class="market-track">
+
+                <div class="market-item">
+                    🇺🇸 <b>USD</b>
+                    <span>12 340 so‘m</span>
+                </div>
+
+                <i>•</i>
+
+                <div class="market-item">
+                    🇪🇺 <b>EUR</b>
+                    <span>14 350 so‘m</span>
+                </div>
+
+                <i>•</i>
+
+                <div class="market-item">
+                    🇬🇧 <b>GBP</b>
+                    <span>16 700 so‘m</span>
+                </div>
+
+                <i>•</i>
+
+                <div class="market-item">
+                    🇷🇺 <b>RUB</b>
+                    <span>155 so‘m</span>
+                </div>
+
+                <i>•</i>
+
+                <div class="market-item">
+                    🇨🇳 <b>CNY</b>
+                    <span>1 720 so‘m</span>
+                </div>
+
+                <i>•</i>
+
+                <div class="market-item">
+                    🇺🇸 <b>USD</b>
+                    <span>12 340 so‘m</span>
+                </div>
+
+                <i>•</i>
+
+                <div class="market-item">
+                    🇪🇺 <b>EUR</b>
+                    <span>14 350 so‘m</span>
+                </div>
+
+                <i>•</i>
+
+                <div class="market-item">
+                    🇬🇧 <b>GBP</b>
+                    <span>16 700 so‘m</span>
+                </div>
+
+                <i>•</i>
+
+                <div class="market-item">
+                    🇷🇺 <b>RUB</b>
+                    <span>155 so‘m</span>
+                </div>
+
+                <i>•</i>
+
+                <div class="market-item">
+                    🇨🇳 <b>CNY</b>
+                    <span>1 720 so‘m</span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= NEWS ================= -->
+
+    <div class="news-bar">
+
+        <div class="news-badge">
+            NEWS
+        </div>
+
+        <div class="news-window">
+
+            <div class="news-track">
+
+                <span>
+                    ⚡ BEST SHOP — tezkor va xavfsiz xizmatlar
+                </span>
+
+                <span>
+                    💎 Telegram Premium paketlari mavjud
+                </span>
+
+                <span>
+                    🎮 O‘yinlarga donat xizmatlari tez orada
+                </span>
+
+                <span>
+                    🎁 Telegram Gifts xizmatlari mavjud
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= HERO ================= -->
+
+    <div class="hero-card">
+
+        <div class="hero-glow"></div>
+
+        <div class="hero-content">
+
+            <span class="hero-small">
+                PREMIUM XIZMATLAR
+            </span>
+
+            <h2>
+                Hammasi<br>
+                <span>bir joyda.</span>
+            </h2>
+
+            <p>
+                Telegram va o‘yin xizmatlarini
+                tez va qulay xarid qiling.
+            </p>
+
+            <button
+                class="primary-button"
+                data-page="services"
+            >
+                Xizmatlarni ko‘rish
+                <span>→</span>
+            </button>
+
+        </div>
+
+        <div class="hero-orb">
+            💎
+        </div>
+
+    </div>
+
+
+    <!-- ================= SERVICES PREVIEW ================= -->
+
+    <div class="section-title">
+
+        <div>
+            <span class="eyebrow">
+                XIZMATLAR
+            </span>
+
+            <h2>
+                Mashhur xizmatlar
+            </h2>
+        </div>
 
         <button
-            class="nav-btn"
+            class="text-button"
             data-page="services"
         >
-            <span>◈</span>
-            <small>Xizmatlar</small>
+            Barchasi →
+        </button>
+
+    </div>
+
+
+    <div class="service-grid">
+
+        <button
+            class="service-card premium-card"
+            data-service="premium"
+        >
+
+            <div class="service-icon">
+                💎
+            </div>
+
+            <strong>
+                Telegram Premium
+            </strong>
+
+            <span>
+                1, 3, 6, 12 oy
+            </span>
+
         </button>
 
 
         <button
-            class="nav-btn"
+            class="service-card stars-card"
+            data-service="stars"
+        >
+
+            <div class="service-icon">
+                ⭐
+            </div>
+
+            <strong>
+                Telegram Stars
+            </strong>
+
+            <span>
+                Stars xarid qilish
+            </span>
+
+        </button>
+
+
+        <button
+            class="service-card gifts-card"
+            data-service="gifts"
+        >
+
+            <div class="service-icon">
+                🎁
+            </div>
+
+            <strong>
+                Telegram Gifts
+            </strong>
+
+            <span>
+                Sovg‘alar
+            </span>
+
+        </button>
+
+    </div>
+
+
+    <!-- ================= GAMES PREVIEW ================= -->
+
+    <div class="section-title">
+
+        <div>
+            <span class="eyebrow">
+                DONAT
+            </span>
+
+            <h2>
+                O‘yinlar
+            </h2>
+        </div>
+
+        <button
+            class="text-button"
             data-page="games"
         >
-            <span>♢</span>
-            <small>Donat</small>
+            Barchasi →
+        </button>
+
+    </div>
+
+
+    <div class="game-preview">
+
+        <button
+            class="game-row"
+            data-game="PUBG Mobile"
+        >
+
+            <div class="game-icon">
+                🎯
+            </div>
+
+            <div class="game-main">
+
+                <strong>
+                    PUBG Mobile
+                </strong>
+
+                <span>
+                    UC Donat
+                </span>
+
+            </div>
+
+            <span class="arrow">
+                →
+            </span>
+
         </button>
 
 
         <button
-            class="nav-btn"
-            data-page="profile"
+            class="game-row"
+            data-game="eFootball"
         >
-            <span>○</span>
-            <small>Profil</small>
+
+            <div class="game-icon">
+                ⚽
+            </div>
+
+            <div class="game-main">
+
+                <strong>
+                    eFootball
+                </strong>
+
+                <span>
+                    Coin Donat
+                </span>
+
+            </div>
+
+            <span class="arrow">
+                →
+            </span>
+
         </button>
 
-    </nav>
+
+        <button
+            class="game-row"
+            data-game="Brawl Stars"
+        >
+
+            <div class="game-icon">
+                ⭐
+            </div>
+
+            <div class="game-main">
+
+                <strong>
+                    Brawl Stars
+                </strong>
+
+                <span>
+                    Gems Donat
+                </span>
+
+            </div>
+
+            <span class="arrow">
+                →
+            </span>
+
+        </button>
+
+    </div>
 
 
-    <!-- ================= TOAST ================= -->
+    <!-- ================= ABOUT ================= -->
 
-    <div
-        class="toast"
-        id="toast"
-    ></div>
+    <div class="about-card">
 
-</div>
+        <div class="about-icon">
+            ⚡
+        </div>
+
+        <div>
+
+            <strong>
+                BEST SHOP
+            </strong>
+
+            <p>
+                Telegram va o‘yin xizmatlari
+                uchun zamonaviy va tezkor do‘kon.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
 
 
-<script src="app.js"></script>
+<!-- ================= SERVICES ================= -->
 
-</body>
-</html>
+<section
+    id="services"
+    class="page"
+>
+
+    <div class="page-head">
+
+        <span class="eyebrow">
+            MARKET
+        </span>
+
+        <h1>
+            Xizmatlar
+        </h1>
+
+        <p>
+            Kerakli xizmatni tanlang
+        </p>
+
+    </div>
+
+
+    <div class="service-list">
+
+        <button
+            class="service-list-item"
+            data-service="premium"
+        >
+
+            <div class="list-icon">
+                💎
+            </div>
+
+            <div class="list-main">
+
+                <strong>
+                    Telegram Premium
+                </strong>
+
+                <span>
+                    Premium obuna paketlari
+                </span>
+
+            </div>
+
+            <span class="list-arrow">
+                →
+            </span>
+
+        </button>
+
+
+        <button
+            class="service-list-item"
+            data-service="stars"
+        >
+
+            <div class="list-icon">
+                ⭐
+            </div>
+
+            <div class="list-main">
+
+                <strong>
+                    Telegram Stars
+                </strong>
+
+                <span>
+                    Telegram Stars xarid qilish
+                </span>
+
+            </div>
+
+            <span class="list-arrow">
+                →
+            </span>
+
+        </button>
+
+
+        <button
+            class="service-list-item"
+            data-service="gifts"
+        >
+
+            <div class="list-icon">
+                🎁
+            </div>
+
+            <div class="list-main">
+
+                <strong>
+                    Telegram Gifts
+                </strong>
+
+                <span>
+                    Telegram sovg‘alari
+                </span>
+
+            </div>
+
+            <span class="list-arrow">
+                →
+            </span>
+
+        </button>
+
+    </div>
+
+
+    <div class="info-card">
+
+        <div class="info-icon">
+            🔐
+        </div>
+
+        <strong>
+            Xavfsiz xarid
+        </strong>
+
+        <p>
+            Barcha buyurtmalar xavfsiz
+            tizim orqali qayta ishlanadi.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- ================= GAMES ================= -->
+
+<section
+    id="games"
+    class="page"
+>
+
+    <div class="page-head">
+
+        <span class="eyebrow">
+            DONAT
+        </span>
+
+        <h1>
+            O‘yinlar
+        </h1>
+
+        <p>
+            O‘zingizga kerakli o‘yinni tanlang
+        </p>
+
+    </div>
+
+
+    <div class="game-list">
+
+        <button
+            class="game-row"
+            data-game="PUBG Mobile"
+        >
+
+            <div class="game-icon">
+                🎯
+            </div>
+
+            <div class="game-main">
+
+                <strong>
+                    PUBG Mobile
+                </strong>
+
+                <span>
+                    UC Donat
+                </span>
+
+            </div>
+
+            <span class="arrow">
+                →
+            </span>
+
+        </button>
+
+
+        <button
+            class="game-row"
+            data-game="eFootball"
+        >
+
+            <div class="game-icon">
+                ⚽
+            </div>
+
+            <div class="game-main">
+
+                <strong>
+                    eFootball
+                </strong>
+
+                <span>
+                    Coin Donat
+                </span>
+
+            </div>
+
+            <span class="arrow">
+                →
+            </span>
+
+        </button>
+
+
+        <button
+            class="game-row"
+            data-game="Brawl Stars"
+        >
+
+            <div class="game-icon">
+                ⭐
+            </div>
+
+            <div class="game-main">
+
+                <strong>
+                    Brawl Stars
+                </strong>
+
+                <span>
+                    Gems Donat
+                </span>
+
+            </div>
+
+            <span class="arrow">
+                →
+            </span>
+
+        </button>
+
+
+        <button
+            class="game-row"
+            data-game="Roblox"
+        >
+
+            <div class="game-icon">
+                🧱
+            </div>
+
+            <div class="game-main">
+
+                <strong>
+                    Roblox
+                </strong>
+
+                <span>
+                    Robux Donat
+                </span>
+
+            </div>
+
+            <span class="arrow">
+                →
+            </span>
+
+        </button>
+
+
+        <button
+            class="game-row"
+            data-game="Free Fire"
+        >
+
+            <div class="game-icon">
+                🔥
+            </div>
+
+            <div class="game-main">
+
+                <strong>
+                    Free Fire
+                </strong>
+
+                <span>
+                    Diamonds Donat
+                </span>
+
+            </div>
+
+            <span class="arrow">
+                →
+            </span>
+
+        </button>
+
+    </div>
+
+
+    <button
+        class="primary-button full"
+        id="other-games"
+    >
+        Boshqa o‘yinlar
+        <span>→</span>
+    </button>
+
+</section>
+
+
+<!-- ================= PROFILE ================= -->
+
+<section
+    id="profile"
+    class="page"
+>
+
+    <div class="page-head">
+
+        <span class="eyebrow">
+            ACCOUNT
+        </span>
+
+        <h1>
+            Profil
+        </h1>
+
+        <p>
+            Hisobingiz haqida ma’lumot
+        </p>
+
+    </div>
+
+
+    <div class="profile-card">
+
+        <div
+            class="profile-avatar"
+            id="avatar"
+        >
+            👤
+        </div>
+
+        <div class="profile-info">
+
+            <strong id="profile-name">
+                Foydalanuvchi
+            </strong>
+
+            <span id="profile-username">
+                Username mavjud emas
+            </span>
+
+            <small id="profile-id">
+                Telegram ID: —
+            </small>
+
+        </div>
+
+    </div>
+
+
+    <div class="profile-menu">
+
+        <button
+            data-profile-page="orders"
+        >
+
+            <span>
+                📦
+            </span>
+
+            <div>
+                <strong>
+                    Buyurtmalar
+                </strong>
+
+                <small>
+                    Xaridlar tarixi
+                </small>
+            </div>
+
+            <b>
+                →
+            </b>
+
+        </button>
+
+
+        <button
+            data-profile-page="bonus"
+        >
+
+            <span>
+                🎁
+            </span>
+
+            <div>
+                <strong>
+                    Bonuslar
+                </strong>
+
+                <small>
+                    Bonus balansingiz
+                </small>
+            </div>
+
+            <b>
+                →
+            </b>
+
+        </button>
+
+
+        <button
+            data-profile-page="referral"
+        >
+
+            <span>
+                🔗
+            </span>
+
+            <div>
+                <strong>
+                    Referal
+                </strong>
+
+                <small>
+                    Do‘stlaringizni taklif qiling
+                </small>
+            </div>
+
+            <b>
+                →
+            </b>
+
+        </button>
+
+
+        <button
+            data-profile-page="settings"
+        >
+
+            <span>
+                ⚙️
+            </span>
+
+            <div>
+                <strong>
+                    Sozlamalar
+                </strong>
+
+                <small>
+                    Ilova sozlamalari
+                </small>
+            </div>
+
+            <b>
+                →
+            </b>
+
+        </button>
+
+
+        <button
+            data-profile-page="help"
+        >
+
+            <span>
+                ❓
+            </span>
+
+            <div>
+                <strong>
+                    Yordam
+                </strong>
+
+                <small>
+                    Savollar va yordam
+                </small>
+            </div>
+
+            <b>
+                →
+            </b>
+
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- ================= PREMIUM ================= -->
+
+<section
+    id="premium"
+    class="page sub-page"
+>
+
+    <button
+        class="back-button"
+        data-page="services"
+    >
+        <span>
+            ←
+        </span>
+
+        Xizmatlar
+    </button>
+
+
+    <div class="page-head">
+
+        <span class="eyebrow">
+            TELEGRAM
+        </span>
+
+        <h1>
+            Premium
+        </h1>
+
+        <p>
+            Premium muddatini tanlang
+        </p>
+
+    </div>
+
+
+    <div class="premium-list">
+
+        <button
+            class="premium-plan"
+            data-plan="1"
+        >
+
+            <div class="plan-icon">
+                💎
+            </div>
+
+            <div class="plan-main">
+
+                <strong>
+                    1 oy
+                </strong>
+
+                <span>
+                    Telegram Premium
+                </span>
+
+            </div>
+
+            <div class="plan-price">
+
+                <small>
+                    Narx
+                </small>
+
+                <b>
+                    —
+                </b>
+
+            </div>
+
+        </button>
+
+
+        <button
+            class="premium-plan"
+            data-plan="3"
+        >
+
+            <div class="plan-icon">
+                💎
+            </div>
+
+            <div class="plan-main">
+
+                <strong>
+                    3 oy
+                </strong>
+
+                <span>
+                    Telegram Premium
+                </span>
+
+            </div>
+
+            <div class="plan-price">
+
+                <small>
+                    Narx
+                </small>
+
+                <b>
+                    —
+                </b>
+
+            </div>
+
+        </button>
+
+
+        <button
+            class="premium-plan"
+            data-plan="6"
+        >
+
+            <div class="plan-icon">
+                💎
+            </div>
+
+            <div class="plan-main">
+
+                <strong>
+                    6 oy
+                </strong>
+
+                <span>
+                    Telegram Premium
+                </span>
+
+            </div>
+
+            <div class="plan-price">
+
+                <small>
+                    Narx
+                </small>
+
+                <b>
+                    —
+                </b>
+
+            </div>
+
+        </button>
+
+
+        <button
+            class="premium-plan popular"
+            data-plan="12"
+        >
+
+            <div class="popular-badge">
+                ENG MASHHUR
+            </div>
+
+            <div class="plan-icon">
+                💎
+            </div>
+
+            <div class="plan-main">
+
+                <strong>
+                    12 oy
+                </strong>
+
+                <span>
+                    Telegram Premium
+                </span>
+
+            </div>
+
+            <div class="plan-price">
+
+                <small>
+                    Narx
+                </small>
+
+                <b>
+                    —
+                </b>
+
+            </div>
+
+        </button>
+
+    </div>
+
+
+    <div class="info-card">
+
+        <div class="info-icon">
+            💎
+        </div>
+
+        <strong>
+            Telegram Premium
+        </strong>
+
+        <p>
+            Premium obunani tanlang va
+            xavfsiz tarzda xarid qiling.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- ================= STARS ================= -->
+
+<section
+    id="stars"
+    class="page sub-page"
+>
+
+    <button
+        class="back-button"
+        data-page="services"
+    >
+        <span>
+            ←
+        </span>
+
+        Xizmatlar
+    </button>
+
+
+    <div class="page-head">
+
+        <span class="eyebrow">
+            TELEGRAM
+        </span>
+
+        <h1>
+            Stars
+        </h1>
+
+        <p>
+            Stars miqdorini tanlang
+        </p>
+
+    </div>
+
+
+    <div class="input-card">
+
+        <label>
+            Telegram username
+        </label>
+
+        <input
+            id="stars-username"
+            type="text"
+            placeholder="@username"
+            autocomplete="off"
+        >
+
+    </div>
+
+
+    <div class="stars-list">
+
+        <button
+            class="stars-item"
+            data-stars="100"
+        >
+            ⭐ 100 Stars
+        </button>
+
+        <button
+            class="stars-item"
+            data-stars="250"
+        >
+            ⭐ 250 Stars
+        </button>
+
+        <button
+            class="stars-item"
+            data-stars="500"
+        >
+            ⭐ 500 Stars
+        </button>
+
+        <button
+            class="stars-item"
+            data-stars="1000"
+        >
+            ⭐ 1000 Stars
+        </button>
+
+    </div>
+
+
+    <div class="selected-box">
+
+        <span>
+            Tanlangan:
+        </span>
+
+        <strong id="selected-stars">
+            — ⭐
+        </strong>
+
+    </div>
+
+
+    <button
+        class="primary-button full"
+        id="stars-continue"
+    >
+        Davom etish
+        <span>
+            →
+        </span>
+    </button>
+
+</section>
+
+
+<!-- ================= GIFTS ================= -->
+
+<section
+    id="gifts"
+    class="page sub-page"
+>
+
+    <button
+        class="back-button"
+        data-page="services"
+    >
+        <span>
+            ←
+        </span>
+
+        Xizmatlar
+    </button>
+
+
+    <div class="page-head">
+
+        <span class="eyebrow">
+            TELEGRAM
+        </span>
+
+        <h1>
+            Gifts
+        </h1>
+
+        <p>
+            Telegram sovg‘asini tanlang
+        </p>
+
+    </div>
+
+
+    <div class="gift-list">
+
+        <button class="gift-item">
+
+            <span class="gift-image">
+                🎁
+            </span>
+
+            <span>
+
+                <strong>
+                    Basic Gift
+                </strong>
+
+                <small>
+                    ⭐ 15
+                </small>
+
+            </span>
+
+            <b>
+                →
+            </b>
+
+        </button>
+
+
+        <button class="gift-item">
+
+            <span class="gift-image">
+                🎂
+            </span>
+
+            <span>
+
+                <strong>
+                    Birthday Gift
+                </strong>
+
+                <small>
+                    ⭐ 50
+                </small>
+
+            </span>
+
+            <b>
+                →
+            </b>
+
+        </button>
+
+
+        <button class="gift-item">
+
+            <span class="gift-image">
+                💝
+            </span>
+
+            <span>
+
+                <strong>
+                    Love Gift
+                </strong>
+
+                <small>
+                    ⭐ 100
+                </small>
+
+            </span>
+
+            <b>
+                →
+            </b>
+
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- ================= ORDERS ================= -->
+
+<section
+    id="orders"
+    class="page sub-page"
+>
+
+    <button
+        class="back-button"
+        data-page="profile"
+    >
+        <span>
+            ←
+        </span>
+
+        Profil
+    </button>
+
+
+    <div class="page-head">
+
+        <span class="eyebrow">
+            ACCOUNT
+        </span>
+
+        <h1>
+            Buyurtmalar
+        </h1>
+
+        <p>
+            Xaridlar tarixi
+        </p>
+
+    </div>
+
+
+    <div class="empty-card">
+
+        <div class="empty-icon">
+            📦
+        </div>
+
+        <strong>
+            Buyurtmalar yo‘q
+        </strong>
+
+        <p>
+            Siz hali hech qanday
+            buyurtma bermagansiz.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- ================= BONUS ================= -->
+
+<section
+    id="bonus"
+    class="page sub-page"
+>
+
+    <button
+        class="back-button"
+        data-page="profile"
+    >
+        <span>
+            ←
+        </span>
+
+        Profil
+    </button>
+
+
+    <div class="page-head">
+
+        <span class="eyebrow">
+            BONUS
+        </span>
+
+        <h1>
+            Bonuslar
+        </h1>
+
+        <p>
+            Bonus balansingiz
+        </p>
+
+    </div>
+
+
+    <div class="bonus-card">
+
+        <span>
+            Bonus balans
+        </span>
+
+        <strong>
+            0 ⭐
+        </strong>
+
+    </div>
+
+</section>
+
+
+<!-- ================= REFERRAL ================= -->
+
+<section
+    id="referral"
+    class="page sub-page"
+>
+
+    <button
+        class="back-button"
+        data-page="profile"
+    >
+        <span>
+            ←
+        </span>
+
+        Profil
+    </button>
+
+
+    <div class="page-head">
+
+        <span class="eyebrow">
+            REFERRAL
+        </span>
+
+        <h1>
+            Referal
+        </h1>
+
+        <p>
+            Do‘stlaringizni taklif qiling
+        </p>
+
+    </div>
+
+
+    <div class="referral-card">
+
+        <div class="referral-icon">
+            🔗
+        </div>
+
+        <strong>
+            Do‘stlaringizni taklif qiling
+        </strong>
+
+        <p>
+            Referal tizimi tez orada ishga tushadi.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- ================= SETTINGS ================= -->
+
+<section
+    id="settings"
+    class="page sub-page"
+>
+
+    <button
+        class="back-button"
+        data-page="profile"
+    >
+        <span>
+            ←
+        </span>
+
+        Profil
+    </button>
+
+
+    <div class="page-head">
+
+        <span class="eyebrow">
+            SETTINGS
+        </span>
+
+        <h1>
+            Sozlamalar
+        </h1>
+
+        <p>
+            Ilova sozlamalari
+        </p>
+
+    </div>
+
+
+    <div class="settings-list">
+
+        <button>
+
+            <span>
+                🌙
+            </span>
+
+            <div>
+
+                <strong>
+                    Tungi rejim
+                </strong>
+
+                <small>
+                    Doimiy yoqilgan
+                </small>
+
+            </div>
+
+        </button>
+
+
+        <button>
+
+            <span>
+                🌐
+            </span>
+
+            <div>
+
+                <strong>
+                    Til
+                </strong>
+
+                <small>
+                    O‘zbek tili
+                </small>
+
+            </div>
+
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- ================= HELP ================= -->
+
+<section
+    id="help"
+    class="page sub-page"
+>
+
+    <button
+        class="back-button"
+        data-page="profile"
+    >
+        <span>
+            ←
+        </span>
+
+        Profil
+    </button>
+
+
+    <div class="page-head">
+
+        <span class="eyebrow">
+            SUPPORT
+        </span>
+
+        <h1>
+            💬 Yordam
+        </h1>
+
+        <p>
+            Savollaringiz bo‘lsa,
+            biz bilan bog‘laning
+        </p>
+
+    </div>
+
+
+    <div class="help-card">
+
+        <div class="help-icon">
+            💬
+        </div>
+
+        <strong>
+            Yordam kerakmi?
+        </strong>
+
+        <p>
+            Muammo yoki savolingiz bo‘lsa,
+            administrator bilan bog‘lanishingiz mumkin.
+        </p>
+
+
+        <button
+            class="primary-button full"
+            id="help-contact"
+        >
+            Bog‘lanish
+            <span>
+                →
+            </span>
+        </button>
+
+    </div>
+
+</section>
+
+
+</main>
+
+
+<!-- ================= BOTTOM NAV ================= -->
+
+<nav class="bottom-nav">
+
+    <button
+        class="nav-btn active"
+        data-page="home"
+    >
+
+        <span>
+            ⌂
+        </span>
+
+        <small>
+            Bosh sahifa
+        </small>
+
+    </button>
+
+
+    <button
+        class="nav-btn"
+        data-page="services"
+    >
+
+        <span>
+            ◈
+        </span>
+
+        <small>
+            Xizmatlar
+        </small>
+
+    </button>
+
+
+    <button
+        class="nav-btn"
+        data-page="games"
+    >
+
+        <span>
+            ♢
+        </span>
+
+        <small>
+            Donat
+        </small>
+
+    </button>
+
+
+    <button
+        class="nav-btn"
+        data-page="profile"
+    >
+
+        <span>
+            ○
+        </span>
+
+        <small>
+            Profil
+        </small>
+
+    </button>
+
+</nav>
+
+
+<!-- ================= TOAST ================= -->
+
+<div
+    class="toast"
+    id="toast"
+></div>
+
+
+<!-- ================= APP JS ================= -->
+
+<script src="./app.js"></script>
+```

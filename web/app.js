@@ -1,41 +1,42 @@
+javascript
+// =========================================
+// BEST SHOP — APP.JS
+// =========================================
 
 // =========================================
 // 🎮 DONAT KANALLARI
-// URL'LARNI FAQAT SHU YERDAN O'ZGARTIRING
 // =========================================
 
 const DONAT_CHANNELS = {
+    pubg: "https://t.me/cwfamily",
 
-    pubg:
-        "https://t.me/cwfamily",
+    efootball: "https://t.me/cwfamily",
 
-    efootball:
-        "https://t.me/cwfamily",
+    brawlStars: "https://t.me/cwfamily",
 
-    brawlStars:
-        "https://t.me/cwfamily",
-
-    other:
-        "https://t.me/cwfamily"
-
+    other: "BU_YERGA_BOSHQA_O'YINLAR_KANAL_URL"
 };
 
 
 // =========================================
-// TELEGRAM
+// 🌐 BACKEND API
 // =========================================
 
-const tg = window.Telegram?.WebApp;
+const API_BASE_URL = "";
+
+// =========================================
+// TELEGRAM WEB APP
+// =========================================
+
+const tg = window.Telegram?.WebApp || null;
 
 if (tg) {
-
     tg.ready();
     tg.expand();
 
     if (tg.enableClosingConfirmation) {
         tg.enableClosingConfirmation();
     }
-
 }
 
 
@@ -43,22 +44,18 @@ if (tg) {
 // ELEMENTS
 // =========================================
 
-const pages =
-    document.querySelectorAll(".page");
+const pages = document.querySelectorAll(".page");
 
-const navButtons =
-    document.querySelectorAll(".nav-btn");
+const navButtons = document.querySelectorAll(".nav-btn");
 
-const toast =
-    document.getElementById("toast");
+const toast = document.getElementById("toast");
 
 
 // =========================================
 // TELEGRAM USER
 // =========================================
 
-const user =
-    tg?.initDataUnsafe?.user || null;
+const user = tg?.initDataUnsafe?.user || null;
 
 
 function setupTelegramUser() {
@@ -72,20 +69,14 @@ function setupTelegramUser() {
         user.first_name || "Foydalanuvchi";
 
 
-    // Greeting
-
     const greeting =
         document.getElementById("greeting");
 
     if (greeting) {
-
         greeting.textContent =
             `Salom, ${firstName} 👋`;
-
     }
 
-
-    // Profile name
 
     const profileName =
         document.getElementById("profile-name");
@@ -98,11 +89,8 @@ function setupTelegramUser() {
 
         profileName.textContent =
             fullName || "Foydalanuvchi";
-
     }
 
-
-    // Username
 
     const username =
         user.username
@@ -111,38 +99,39 @@ function setupTelegramUser() {
 
 
     const profileUsername =
-        document.getElementById("profile-username");
+        document.getElementById(
+            "profile-username"
+        );
 
     if (profileUsername) {
-
         profileUsername.textContent =
             username;
-
     }
 
 
-    // Telegram ID
-
     const profileId =
-        document.getElementById("profile-id");
+        document.getElementById(
+            "profile-id"
+        );
 
     if (profileId) {
 
         profileId.textContent =
             `Telegram ID: ${user.id || "—"}`;
-
     }
 
-
-    // Avatar
 
     if (user.photo_url) {
 
         const avatar =
-            document.getElementById("avatar");
+            document.getElementById(
+                "avatar"
+            );
 
         const headerAvatar =
-            document.getElementById("header-avatar");
+            document.getElementById(
+                "header-avatar"
+            );
 
 
         if (avatar) {
@@ -150,16 +139,17 @@ function setupTelegramUser() {
             avatar.innerHTML = "";
 
             const img =
-                document.createElement("img");
+                document.createElement(
+                    "img"
+                );
 
             img.src =
                 user.photo_url;
 
             img.alt =
-                "avatar";
+                "Telegram avatar";
 
             avatar.appendChild(img);
-
         }
 
 
@@ -168,20 +158,19 @@ function setupTelegramUser() {
             headerAvatar.innerHTML = "";
 
             const img =
-                document.createElement("img");
+                document.createElement(
+                    "img"
+                );
 
             img.src =
                 user.photo_url;
 
             img.alt =
-                "avatar";
+                "Telegram avatar";
 
             headerAvatar.appendChild(img);
-
         }
-
     }
-
 }
 
 
@@ -189,13 +178,15 @@ setupTelegramUser();
 
 
 // =========================================
-// NAVIGATION
+// PAGE NAVIGATION
 // =========================================
 
 function openPage(pageId) {
 
     const target =
-        document.getElementById(pageId);
+        document.getElementById(
+            pageId
+        );
 
     if (!target) {
         return;
@@ -212,12 +203,33 @@ function openPage(pageId) {
     });
 
 
+    const rootPages = [
+        "home",
+        "services",
+        "games",
+        "profile"
+    ];
+
+
     navButtons.forEach(button => {
+
+        const buttonPage =
+            button.dataset.page;
 
         button.classList.toggle(
             "active",
-            button.dataset.page === pageId
+            buttonPage === pageId
         );
+
+
+        if (
+            !rootPages.includes(pageId) &&
+            buttonPage === "services"
+        ) {
+            button.classList.remove(
+                "active"
+            );
+        }
 
     });
 
@@ -228,12 +240,19 @@ function openPage(pageId) {
     });
 
 
-    updateTelegramBackButton(pageId);
-
+    updateTelegramBackButton(
+        pageId
+    );
 }
 
 
-function updateTelegramBackButton(pageId) {
+// =========================================
+// TELEGRAM BACK BUTTON
+// =========================================
+
+function updateTelegramBackButton(
+    pageId
+) {
 
     if (!tg?.BackButton) {
         return;
@@ -248,7 +267,9 @@ function updateTelegramBackButton(pageId) {
     ];
 
 
-    if (rootPages.includes(pageId)) {
+    if (
+        rootPages.includes(pageId)
+    ) {
 
         tg.BackButton.hide();
 
@@ -257,12 +278,11 @@ function updateTelegramBackButton(pageId) {
         tg.BackButton.show();
 
     }
-
 }
 
 
 // =========================================
-// BOTTOM NAV
+// BOTTOM NAVIGATION
 // =========================================
 
 navButtons.forEach(button => {
@@ -274,12 +294,11 @@ navButtons.forEach(button => {
             const page =
                 button.dataset.page;
 
-            if (page) {
-
-                openPage(page);
-
+            if (!page) {
+                return;
             }
 
+            openPage(page);
         }
     );
 
@@ -294,7 +313,11 @@ document
     .querySelectorAll("[data-page]")
     .forEach(button => {
 
-        if (button.classList.contains("nav-btn")) {
+        if (
+            button.classList.contains(
+                "nav-btn"
+            )
+        ) {
             return;
         }
 
@@ -307,11 +330,8 @@ document
                     button.dataset.page;
 
                 if (page) {
-
                     openPage(page);
-
                 }
-
             }
         );
 
@@ -334,30 +354,40 @@ document
                     button.dataset.service;
 
 
-                if (service === "premium") {
+                switch (service) {
 
-                    openPage("premium");
+                    case "premium":
 
-                    return;
+                        openPage(
+                            "premium"
+                        );
 
-                }
-
-
-                if (service === "stars") {
-
-                    openPage("stars");
-
-                    return;
-
-                }
+                        break;
 
 
-                if (service === "gifts") {
+                    case "stars":
 
-                    openPage("gifts");
+                        openPage(
+                            "stars"
+                        );
 
-                    return;
+                        break;
 
+
+                    case "gifts":
+
+                        openPage(
+                            "gifts"
+                        );
+
+                        break;
+
+
+                    default:
+
+                        showToast(
+                            "Bu xizmat hali mavjud emas"
+                        );
                 }
 
             }
@@ -367,7 +397,7 @@ document
 
 
 // =========================================
-// PREMIUM
+// 💎 PREMIUM
 // =========================================
 
 document
@@ -376,24 +406,213 @@ document
 
         plan.addEventListener(
             "click",
-            () => {
+            async () => {
 
                 const months =
-                    plan.dataset.plan;
+                    Number(
+                        plan.dataset.plan
+                    );
+
+
+                if (!months) {
+                    return;
+                }
+
+
+                // ---------------------------------
+                // LOADING
+                // ---------------------------------
+
+                plan.disabled = true;
 
 
                 showToast(
-                    `${months} oylik Premium tanlandi`
+                    "Invoice tayyorlanmoqda..."
                 );
 
 
-                /*
-                 * PAYMENT / ORDER
-                 * keyin shu joyga ulanadi.
-                 *
-                 * Hozircha mavjud invoice
-                 * tizimiga tegilmaydi.
-                 */
+                try {
+
+                    // ---------------------------------
+                    // TELEGRAM INIT DATA
+                    // ---------------------------------
+
+                    if (!tg) {
+
+                        throw new Error(
+                            "Telegram WebApp topilmadi."
+                        );
+                    }
+
+
+                    const initData =
+                        tg.initData;
+
+
+                    if (!initData) {
+
+                        throw new Error(
+                            "Telegram initData topilmadi."
+                        );
+                    }
+
+
+                    // ---------------------------------
+                    // BACKEND REQUEST
+                    // ---------------------------------
+
+                    const response =
+                        await fetch(
+                            `${API_BASE_URL}/api/orders/premium-invoice?months=${months}`,
+                            {
+                                method: "POST",
+
+                                headers: {
+                                    "X-Telegram-Init-Data":
+                                        initData
+                                }
+                            }
+                        );
+
+
+                    // ---------------------------------
+                    // RESPONSE
+                    // ---------------------------------
+
+                    let result = null;
+
+
+                    try {
+
+                        result =
+                            await response.json();
+
+                    } catch {
+
+                        throw new Error(
+                            "Serverdan noto‘g‘ri javob keldi."
+                        );
+                    }
+
+
+                    // ---------------------------------
+                    // SERVER ERROR
+                    // ---------------------------------
+
+                    if (!response.ok) {
+
+                        throw new Error(
+                            result?.detail ||
+                            "Invoice yaratilmadi."
+                        );
+                    }
+
+
+                    // ---------------------------------
+                    // INVOICE LINK
+                    // ---------------------------------
+
+                    const invoiceLink =
+                        result?.invoice_link;
+
+
+                    if (!invoiceLink) {
+
+                        throw new Error(
+                            "Invoice link olinmadi."
+                        );
+                    }
+
+
+                    // ---------------------------------
+                    // OPEN TELEGRAM INVOICE
+                    // ---------------------------------
+
+                    if (
+                        tg.openInvoice
+                    ) {
+
+                        tg.openInvoice(
+                            invoiceLink,
+                            (status) => {
+
+                                console.log(
+                                    "Telegram invoice status:",
+                                    status
+                                );
+
+
+                                if (
+                                    status ===
+                                    "paid"
+                                ) {
+
+                                    showToast(
+                                        "✅ To‘lov muvaffaqiyatli!"
+                                    );
+
+                                }
+
+
+                                else if (
+                                    status ===
+                                    "cancelled"
+                                ) {
+
+                                    showToast(
+                                        "To‘lov bekor qilindi."
+                                    );
+
+                                }
+
+
+                                else if (
+                                    status ===
+                                    "failed"
+                                ) {
+
+                                    showToast(
+                                        "❌ To‘lov amalga oshmadi."
+                                    );
+
+                                }
+
+                            }
+                        );
+
+                    } else {
+
+                        // ---------------------------------
+                        // FALLBACK
+                        // ---------------------------------
+
+                        window.open(
+                            invoiceLink,
+                            "_blank"
+                        );
+
+                    }
+
+
+                } catch (error) {
+
+                    console.error(
+                        "Premium invoice error:",
+                        error
+                    );
+
+
+                    showToast(
+                        error.message ||
+                        "Invoice yaratishda xatolik."
+                    );
+
+
+                } finally {
+
+                    plan.disabled = false;
+
+                }
 
             }
         );
@@ -402,7 +621,7 @@ document
 
 
 // =========================================
-// STARS
+// ⭐ STARS
 // =========================================
 
 let selectedStars = 0;
@@ -426,15 +645,13 @@ starsButtons.forEach(button => {
         "click",
         () => {
 
-            starsButtons.forEach(
-                item => {
+            starsButtons.forEach(item => {
 
-                    item.classList.remove(
-                        "selected"
-                    );
+                item.classList.remove(
+                    "selected"
+                );
 
-                }
-            );
+            });
 
 
             button.classList.add(
@@ -448,7 +665,9 @@ starsButtons.forEach(button => {
                 );
 
 
-            if (selectedStarsElement) {
+            if (
+                selectedStarsElement
+            ) {
 
                 selectedStarsElement.textContent =
                     `${selectedStars} ⭐`;
@@ -460,6 +679,10 @@ starsButtons.forEach(button => {
 
 });
 
+
+// =========================================
+// ⭐ STARS CONTINUE
+// =========================================
 
 const starsContinue =
     document.getElementById(
@@ -494,7 +717,6 @@ if (starsContinue) {
                 input?.focus();
 
                 return;
-
             }
 
 
@@ -505,22 +727,19 @@ if (starsContinue) {
                 );
 
                 return;
-
             }
 
 
+            const cleanUsername =
+                username.replace(
+                    /^@/,
+                    ""
+                );
+
+
             showToast(
-                `@${username} uchun ${selectedStars} ⭐ tanlandi`
+                `@${cleanUsername} uchun ${selectedStars} ⭐ tanlandi`
             );
-
-
-            /*
-             * Keyinchalik:
-             * order yaratish →
-             * invoice →
-             * payment
-             * shu yerga ulanadi.
-             */
 
         }
     );
@@ -529,7 +748,7 @@ if (starsContinue) {
 
 
 // =========================================
-// GIFTS
+// 🎁 GIFTS
 // =========================================
 
 document
@@ -543,24 +762,20 @@ document
                 const name =
                     gift.querySelector(
                         "strong"
-                    )?.textContent || "Gift";
+                    )?.textContent ||
+                    "Gift";
 
 
                 const price =
                     gift.querySelector(
                         "small"
-                    )?.textContent || "";
+                    )?.textContent ||
+                    "";
 
 
                 showToast(
                     `${name} — ${price}`
                 );
-
-
-                /*
-                 * Keyinchalik gift order
-                 * tizimiga ulanadi.
-                 */
 
             }
         );
@@ -584,13 +799,13 @@ document
                     game.dataset.game;
 
 
-                let channelUrl = null;
+                let channelUrl =
+                    null;
 
-
-                // PUBG Mobile
 
                 if (
-                    gameName === "PUBG Mobile"
+                    gameName ===
+                    "PUBG Mobile"
                 ) {
 
                     channelUrl =
@@ -599,10 +814,9 @@ document
                 }
 
 
-                // eFootball
-
                 if (
-                    gameName === "eFootball"
+                    gameName ===
+                    "eFootball"
                 ) {
 
                     channelUrl =
@@ -611,10 +825,9 @@ document
                 }
 
 
-                // Brawl Stars
-
                 if (
-                    gameName === "Brawl Stars"
+                    gameName ===
+                    "Brawl Stars"
                 ) {
 
                     channelUrl =
@@ -622,8 +835,6 @@ document
 
                 }
 
-
-                // URL tekshirish
 
                 if (
                     !channelUrl ||
@@ -637,13 +848,12 @@ document
                     );
 
                     return;
-
                 }
 
 
-                // Telegram kanalini ochish
-
-                if (tg?.openTelegramLink) {
+                if (
+                    tg?.openTelegramLink
+                ) {
 
                     tg.openTelegramLink(
                         channelUrl
@@ -665,7 +875,7 @@ document
 
 
 // =========================================
-// 🎮 BOSHQA O'YINLAR
+// 🎮 OTHER GAMES
 // =========================================
 
 const otherGames =
@@ -696,11 +906,12 @@ if (otherGames) {
                 );
 
                 return;
-
             }
 
 
-            if (tg?.openTelegramLink) {
+            if (
+                tg?.openTelegramLink
+            ) {
 
                 tg.openTelegramLink(
                     channelUrl
@@ -722,7 +933,7 @@ if (otherGames) {
 
 
 // =========================================
-// PROFILE LINKS
+// 👤 PROFILE BUTTON
 // =========================================
 
 const profileButton =
@@ -737,7 +948,9 @@ if (profileButton) {
         "click",
         () => {
 
-            openPage("profile");
+            openPage(
+                "profile"
+            );
 
         }
     );
@@ -746,7 +959,7 @@ if (profileButton) {
 
 
 // =========================================
-// PROFILE MENU
+// 👤 PROFILE MENU
 // =========================================
 
 document
@@ -769,7 +982,7 @@ document
                         "Buyurtmalar tarixi tez orada",
 
                     bonus:
-                        "Bonuslar bo‘limi tez orada",
+                        "Bonuslar tez orada",
 
                     referral:
                         "Referal tizimi tez orada",
@@ -795,7 +1008,7 @@ document
 
 
 // =========================================
-// TELEGRAM PROFILE
+// 👤 TELEGRAM PROFILE
 // =========================================
 
 const telegramProfile =
@@ -817,7 +1030,6 @@ if (telegramProfile) {
                 );
 
                 return;
-
             }
 
 
@@ -825,7 +1037,9 @@ if (telegramProfile) {
                 `tg://user?id=${user.id}`;
 
 
-            if (tg?.openTelegramLink) {
+            if (
+                tg?.openTelegramLink
+            ) {
 
                 tg.openTelegramLink(
                     url
@@ -845,12 +1059,12 @@ if (telegramProfile) {
 
 
 // =========================================
-// BEST SHOP CHANNEL
+// 📢 BEST SHOP CHANNEL
 // =========================================
 
 const bestshopChannel =
-    document.getElementById(
-        "bestshop-channel"
+    document.querySelector(
+        "#bestshop-channel"
     );
 
 
@@ -860,17 +1074,13 @@ if (bestshopChannel) {
         "click",
         () => {
 
-            /*
-             * DIQQAT:
-             * Kanal username'i aniq bo‘lganda
-             * shu URL'ni almashtiramiz.
-             */
-
             const channelUrl =
                 "https://t.me/bestshop";
 
 
-            if (tg?.openTelegramLink) {
+            if (
+                tg?.openTelegramLink
+            ) {
 
                 tg.openTelegramLink(
                     channelUrl
@@ -916,14 +1126,17 @@ if (tg?.BackButton) {
                 pageId === "gifts"
             ) {
 
-                openPage("services");
+                openPage(
+                    "services"
+                );
 
                 return;
-
             }
 
 
-            openPage("home");
+            openPage(
+                "home"
+            );
 
         }
     );
@@ -983,7 +1196,10 @@ document.documentElement.style.colorScheme =
 
 
 // =========================================
-// START
+// INITIAL PAGE
 // =========================================
 
-openPage("home");
+openPage(
+    "home"
+);
+
